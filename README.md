@@ -7,6 +7,12 @@
 Double-click `index.html`. It opens in Chrome, Edge, Firefox or Safari.
 No internet and no server are needed. The fonts are included in the files.
 
+## Works on every screen
+- **Laptop, projector, desktop, landscape tablet:** the full 16:9 slide is scaled to fit the screen (best for presenting).
+- **Phone, portrait tablet, small window:** the layout switches automatically to one column. Each slide scrolls up and down, and the text stays large enough to read.
+- **Phone turned sideways:** a compact two-column layout.
+- Swipe left or right on a touch screen to change slides.
+
 ## Controls
 | Action | Key / button |
 |---|---|

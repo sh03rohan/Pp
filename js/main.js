@@ -20,7 +20,15 @@
   let current = 0;
 
   /* ---------- Fit 1600×900 stage into the viewport ---------- */
+  /* Two layouts:
+     - "stage" mode: the 16:9 canvas is scaled to fit (laptops, projectors, landscape tablets)
+     - "flow" mode: content reflows into one scrollable column (phones, portrait tablets, small windows)
+     Flow mode is used when the scaled canvas would be too small to read, or the screen is tall/narrow. */
   function fit() {
+    const W = window.innerWidth, Hh = window.innerHeight;
+    const flow = Math.min(W / 1600, Hh / 900) < 0.55 || W / Hh < 1.2;
+    document.body.classList.toggle("flow", flow);
+    if (flow) { stage.style.transform = ""; return; }
     const w = viewport.clientWidth, h = viewport.clientHeight;
     const s = Math.min(w / 1600, h / 900);
     stage.style.transform = `translate(-50%, -50%) scale(${s})`;
@@ -75,6 +83,7 @@
     const mPrev = modules[slides[prev].dataset.module];
     if (mPrev && mPrev.leave && n !== prev) mPrev.leave();
     current = n;
+    slides[n].scrollTop = 0;
     slides.forEach((s, i) => {
       s.classList.toggle("active", i === n);
       s.classList.toggle("before", i < n);
@@ -378,7 +387,7 @@
       queue = bitStr.split("").map(Number);
       tokens.forEach((t) => t.el && t.el.remove());
       tokens = []; received = ""; rxBits = ""; sentCount = 0; tSend = 0;
-      $("#rxText").textContent = "–"; $("#rxBits").textContent = "receiving…";
+      $("#rxText").textContent = "–"; $("#rxOut").textContent = "…"; $("#rxBits").textContent = "receiving…";
       renderStream();
       running = true; lp.start();
     }
@@ -407,7 +416,7 @@
           rxBits += t.b;
           if (rxBits.length % 8 === 0) {
             received += String.fromCharCode(parseInt(rxBits.slice(-8), 2));
-            $("#rxText").textContent = received;
+            $("#rxText").textContent = received; $("#rxOut").textContent = received;
           }
           $("#rxBits").textContent = rxBits.slice(-8).padEnd(8, "·");
           tokens.splice(k, 1);

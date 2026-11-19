@@ -717,3 +717,197 @@ body.idle .hint, body.notes-open .hint { opacity: 0; }
 .s-final .thanks h3 { font-size: 70px; }
 .s-final .thanks p { font-size: 24px; margin-top: 4px; }
 .s-final .thanks .team-mini { margin-top: 12px; font-size: 16px; line-height: 1.5; }
+
+/* ==========================================================
+   FLOW MODE — phones, portrait tablets and small windows
+   (body.flow is set by js/main.js when the 16:9 canvas would be too small)
+   ========================================================== */
+body.flow .viewport, body.flow.notes-open .viewport { right: 0; }
+body.flow .stage {
+  left: 0; top: 0; width: 100%; height: 100%;
+  transform: none !important; background-size: 32px 32px;
+}
+body.flow .topbar {
+  height: 56px; padding: 0 16px; gap: 10px;
+  background: rgba(5, 9, 18, .94); border-bottom: 1px solid var(--line);
+}
+body.flow .brand { font-size: 15px; gap: 8px; flex: none; }
+body.flow .brand svg { width: 22px; height: 22px; }
+body.flow .speaker-chip { font-size: 14px; padding: 5px 12px 5px 5px; gap: 8px; min-width: 0; }
+body.flow .speaker-chip .num { width: 26px; height: 26px; font-size: 13px; flex: none; }
+body.flow .speaker-chip .who { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+body.flow .counter { font-size: 14px; flex: none; }
+body.flow .counter b { font-size: 17px; }
+
+body.flow .slide {
+  display: block; overflow-y: auto; overflow-x: hidden;
+  padding: 80px 20px 110px;
+  -webkit-overflow-scrolling: touch; overscroll-behavior: contain;
+  transform: translateX(30px);
+}
+body.flow .slide.active { transform: none; }
+body.flow .slide.before { transform: translateX(-30px); }
+body.flow h2 { font-size: clamp(28px, 6.5vw, 46px); margin-top: 10px; }
+body.flow .eyebrow { font-size: 12px; }
+body.flow .eyebrow::before { width: 20px; }
+body.flow .body { display: grid; grid-template-columns: 1fr !important; grid-template-rows: none !important; gap: 18px; margin-top: 22px; }
+body.flow .card { padding: 18px; border-radius: 16px; }
+body.flow .points { gap: 14px; }
+body.flow .points li { font-size: 18px; grid-template-columns: 34px 1fr; gap: 12px; }
+body.flow .points li .ic { width: 34px; height: 34px; border-radius: 10px; font-size: 15px; }
+body.flow .points li small { font-size: 15px; }
+body.flow .btn { height: 46px; font-size: 16px; padding: 0 18px; }
+body.flow .try { font-size: 12px; }
+
+/* Slide 1 — title */
+body.flow .s-title { padding-top: 84px; }
+body.flow .s-title .wrap { grid-template-columns: 1fr; gap: 10px; }
+body.flow .s-title h1 { font-size: clamp(32px, 8vw, 58px); margin: 14px 0 14px; }
+body.flow .s-title h1 .small { font-size: clamp(17px, 4vw, 26px); }
+body.flow .s-title .sub { font-size: clamp(16px, 3.6vw, 22px); }
+body.flow .s-title .team { grid-template-columns: 1fr 1fr; margin-top: 24px; gap: 10px; }
+body.flow .s-title .member { padding: 10px 12px 10px 10px; }
+body.flow .s-title .member span { font-size: 15px; }
+body.flow .s-title .member em { font-size: 13px; }
+body.flow .emblem { width: min(320px, 70vw); height: auto; justify-self: center; order: -1; }
+body.flow .s-title .bg { position: fixed; }
+
+/* Slide 2 — why */
+body.flow .pair { grid-template-columns: 1fr 1fr; }
+body.flow .pcard { grid-template-columns: 40px 1fr; padding: 14px; }
+body.flow .pcard .ic { width: 40px; height: 40px; }
+body.flow .pcard b { font-size: 20px; }
+body.flow .rule { font-size: 17px; margin: 14px 0 12px; }
+body.flow .s-why .step b { font-size: 19px; }
+body.flow .s-why .step span { font-size: 15px; }
+body.flow .s-why .step .n { width: 40px; height: 40px; font-size: 17px; }
+body.flow .s-why .step { grid-template-columns: 40px 1fr; gap: 12px; }
+body.flow .pc svg { height: auto; }
+
+/* Slide 3 — transistors */
+body.flow .s-trans .top { grid-template-columns: 1fr; gap: 18px; }
+body.flow .tr-demo { grid-template-columns: 1fr; gap: 10px; }
+body.flow .tr-demo svg { height: auto; }
+body.flow .tr-side { flex-direction: row; justify-content: center; gap: 22px; flex-wrap: wrap; }
+body.flow .bigbit { font-size: 84px; }
+body.flow .toggle { width: 130px; height: 56px; }
+body.flow .toggle::after { width: 42px; height: 42px; }
+body.flow .tr-demo.on .toggle::after { transform: translateX(74px); }
+body.flow .byte { grid-template-columns: 1fr; gap: 14px; }
+body.flow .bits { gap: 6px; }
+body.flow .bit { height: 66px; border-radius: 10px; }
+body.flow .bit b { font-size: 24px; }
+body.flow .bit small { font-size: 11px; }
+body.flow .byte-out { justify-content: center; }
+body.flow .readout b { font-size: 26px; }
+
+/* Slide 4 — logic gates */
+body.flow .gate-tabs { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+body.flow .gate-tab { grid-template-columns: 1fr; justify-items: center; text-align: center; gap: 6px; padding: 12px 8px; }
+body.flow .gate-tab svg { width: 70px; height: 42px; }
+body.flow .gate-tab > span > b { font-size: 20px; }
+body.flow .gate-tab span span { font-size: 13px; }
+body.flow .gate-lab { padding: 18px; gap: 14px; }
+body.flow .gate-stage { grid-template-columns: 1fr; gap: 12px; }
+body.flow .inputs { display: flex; gap: 12px; justify-content: center; }
+body.flow .gate-svg { height: auto; }
+body.flow .gate-bottom { grid-template-columns: 1fr; justify-items: center; gap: 14px; }
+body.flow .example { font-size: 17px; }
+
+/* Slide 5 — light and waves */
+body.flow .cf-head { flex-direction: column; align-items: flex-start; gap: 10px; }
+body.flow .cf-head p { font-size: 17px; }
+body.flow .comm-fiber .fiber-svg { height: auto; margin: 6px 0; }
+body.flow .fiber-ctrl { grid-template-columns: 1fr auto; gap: 10px; }
+body.flow .fiber-ctrl input[type=text] { width: 100%; height: 46px; }
+body.flow .bitstream, body.flow .speed-chip { grid-column: 1 / -1; }
+body.flow .bitstream { font-size: 15px; white-space: normal; }
+body.flow .speed-chip { font-size: 15px; padding: 10px 14px; }
+body.flow .wcards { grid-template-columns: 1fr 1fr; gap: 12px; }
+
+/* Slide 6 — robot */
+body.flow .sensors { grid-template-columns: 1fr 1fr; gap: 10px; }
+body.flow .sensor { padding: 14px; gap: 6px; }
+body.flow .sensor b { font-size: 19px; }
+body.flow .sensor span { font-size: 14px; }
+body.flow .echo-formula { font-size: 16px; }
+body.flow .robot-lab { grid-template-rows: auto auto; padding: 14px; }
+body.flow .robot-svg { height: auto; }
+body.flow .robot-hud { grid-template-columns: 1fr; gap: 10px; }
+body.flow .status { min-width: 0; font-size: 16px; }
+body.flow .robot-hud label { flex-wrap: wrap; }
+body.flow .robot-hud input[type=range] { width: 100% !important; min-width: 180px; flex: 1; }
+
+/* Slide 7 — quantum */
+body.flow .compare { grid-template-columns: 1fr 1fr; gap: 12px; }
+body.flow .cmp { padding: 16px; }
+body.flow .cmp h4 { font-size: 20px; }
+body.flow .cmp p { font-size: 16px; }
+body.flow .cmp .viz { height: 80px; }
+body.flow .s-quantum .points li { font-size: 17px; }
+body.flow .bloch { padding: 16px; }
+body.flow .bloch svg { height: auto; }
+body.flow .q-ctrl { flex-wrap: wrap; }
+
+/* Slide 8 — future + conclusion */
+body.flow .s-final .fcards { grid-template-columns: 1fr 1fr; gap: 12px; }
+body.flow .s-final .fcard svg { height: 96px; }
+body.flow .s-final .fcard h4 { font-size: 19px; }
+body.flow .s-final .fcard p { font-size: 15px; }
+body.flow .s-final .end-grid { grid-template-columns: 1fr; gap: 20px; }
+body.flow .s-final .quote { font-size: clamp(26px, 6vw, 38px); }
+body.flow .s-final .end-points p { font-size: 17px; }
+body.flow .s-final .thanks h3 { font-size: clamp(44px, 11vw, 66px); }
+body.flow .s-final .thanks p { font-size: 20px; }
+
+/* Controls + notes in flow mode */
+body.flow .controls, body.flow.notes-open .controls { left: 50%; bottom: 12px; gap: 4px; padding: 6px; max-width: calc(100% - 24px); }
+body.flow .ctrl { height: 40px; min-width: 40px; padding: 0 12px; font-size: 14px; }
+body.flow .dots { gap: 8px; padding: 0 4px; }
+body.flow .dot { width: 9px; height: 9px; }
+body.flow .hint { display: none; }
+body.flow .notes { width: min(420px, 100%); box-shadow: -20px 0 40px rgba(0,0,0,.5); }
+body.flow .n-script { font-size: 19px; }
+
+/* Small phones */
+@media (max-width: 560px) {
+  body.flow .speaker-chip .topic { display: none; }
+  body.flow .brand { font-size: 0; }
+  body.flow .slide { padding-left: 16px; padding-right: 16px; }
+  body.flow .ctrl .lbl, body.flow #notesBtn { font-size: 0; gap: 0; }
+  body.flow #notesBtn svg { margin: 0; }
+  body.flow .s-title .team { grid-template-columns: 1fr; }
+  body.flow .pair, body.flow .compare { grid-template-columns: 1fr; }
+  body.flow .bits { grid-template-columns: repeat(4, 1fr); }
+  body.flow .wcards, body.flow .s-final .fcards { grid-template-columns: 1fr 1fr; }
+  body.flow .gate-tab span span { display: none; }
+}
+@media (max-width: 380px) {
+  body.flow .dots { display: none; }
+  body.flow .wcards, body.flow .s-final .fcards, body.flow .sensors { grid-template-columns: 1fr; }
+}
+
+/* Received-word readout: only needed when the fiber drawing is small */
+.rx-out { display: none; }
+body.flow .rx-out { display: block; grid-column: 1 / -1; font-size: 17px; font-weight: 600; color: var(--muted); }
+body.flow .rx-out b { color: var(--cyan); font-size: 22px; letter-spacing: .08em; margin-left: 6px; }
+
+/* Short landscape screens (phones turned sideways) */
+@media (max-height: 520px) and (min-width: 640px) {
+  body.flow .topbar { height: 46px; }
+  body.flow .slide { padding: 62px 24px 76px; }
+  body.flow h2 { font-size: 30px; margin-top: 6px; }
+  body.flow .body { margin-top: 14px; gap: 14px; }
+  body.flow .controls { bottom: 6px; padding: 4px; }
+  body.flow .ctrl { height: 36px; min-width: 36px; }
+  body.flow .emblem { display: none; }
+  body.flow .s-title { padding-top: 64px; }
+  body.flow .s-title h1 { font-size: 36px; margin: 8px 0; }
+  body.flow .s-title .team { grid-template-columns: repeat(4, 1fr); margin-top: 16px; }
+  body.flow .s-why .body, body.flow .s-gates .body, body.flow .s-robot .body,
+  body.flow .s-quantum .body { grid-template-columns: 1fr 1fr !important; align-items: start; }
+  body.flow .s-trans .top, body.flow .s-final .end-grid { grid-template-columns: 1fr 1fr; align-items: center; }
+  body.flow .s-final .fcards, body.flow .wcards { grid-template-columns: repeat(4, 1fr); }
+  body.flow .gate-tabs { grid-template-columns: 1fr; }
+  body.flow .gate-tab { grid-template-columns: 70px 1fr; justify-items: start; text-align: left; }
+}
