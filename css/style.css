@@ -911,3 +911,68 @@ body.flow .rx-out b { color: var(--cyan); font-size: 22px; letter-spacing: .08em
   body.flow .gate-tabs { grid-template-columns: 1fr; }
   body.flow .gate-tab { grid-template-columns: 70px 1fr; justify-items: start; text-align: left; }
 }
+
+/* ==========================================================
+   Speaker 2 — Electricity + Electronics slides
+   ========================================================== */
+.s-elec .body { grid-template-columns: 590px 1fr; align-items: center; gap: 36px; }
+.lead { display: grid; grid-template-columns: 40px 1fr; gap: 14px; align-items: start; font-size: 21px; line-height: 1.38; margin-bottom: 12px; }
+.lead svg { width: 40px; height: 40px; padding: 8px; border-radius: 12px; background: var(--blue-soft); color: var(--cyan); }
+.lead b { color: var(--cyan); }
+.s-elec .def { padding: 11px 18px; grid-template-columns: 50px 1fr; gap: 16px; }
+.s-elec .def .sym { width: 50px; height: 50px; font-size: 24px; }
+.s-elec .def b { font-size: 23px; }
+.s-elec .def span { font-size: 18px; }
+.s-elec .defs { gap: 10px; }
+.s-elec .meter { margin-top: 12px; padding: 14px 20px; display: grid; gap: 8px; }
+.srow { display: grid; grid-template-columns: 120px 1fr 86px; gap: 14px; align-items: center; }
+.srow label { font-size: 18px; font-weight: 700; }
+.srow input[type=range] { margin-top: 0; }
+.srow b { font-size: 20px; text-align: right; font-variant-numeric: tabular-nums; }
+.irow { display: flex; justify-content: space-between; align-items: center; padding-top: 8px; border-top: 1px solid var(--line); }
+.irow span { font-size: 16px; color: var(--muted); }
+.irow b { font-size: 30px; color: var(--cyan); font-variant-numeric: tabular-nums; }
+.s-elec #circuitSvg { width: 100%; height: 470px; }
+.s-elec .circuit .nopower svg { width: 22px; height: 22px; flex: none; }
+.circuit .resistor { fill: none; stroke: #FFB547; stroke-width: 5; stroke-linejoin: round; stroke-linecap: round; }
+.circuit #cpuBox { transition: stroke .3s, filter .3s; }
+.circuit.powered #cpuBox { stroke: var(--cyan); filter: drop-shadow(0 0 12px rgba(34,211,238,.45)); }
+.nopower { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 6px; padding: 12px 18px; border-radius: 14px;
+  font-size: 20px; font-weight: 700; color: var(--muted); background: var(--panel); border: 1px solid var(--line); transition: color .3s, border-color .3s, background .3s; }
+.nopower svg { width: 22px; height: 22px; color: var(--cyan); }
+.nopower.off { color: var(--stop); border-color: var(--stop); background: rgba(255,92,122,.1); }
+.nopower.off svg { color: var(--stop); }
+
+.subline { font-size: 22px; color: var(--muted); margin-top: 10px; }
+.subline b { color: var(--text); }
+.s-trans .body { margin-top: 22px; gap: 20px; }
+.elist { list-style: none; display: grid; gap: 10px; }
+.elist li { display: grid; grid-template-columns: 40px 1fr; gap: 14px; align-items: center; font-size: 20px; line-height: 1.3; }
+.elist .ic { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: var(--blue-soft); color: var(--cyan); font-weight: 800; font-size: 13px; }
+.elist .ic svg { width: 22px; height: 22px; }
+.s-trans .tr-demo svg { height: 250px; }
+.s-trans .byte { padding: 16px 26px; }
+.s-trans .bit { height: 74px; }
+
+/* flow mode */
+body.flow .s-elec .body { gap: 18px; }
+body.flow .lead { font-size: 17px; grid-template-columns: 34px 1fr; }
+body.flow .lead svg { width: 34px; height: 34px; padding: 7px; }
+body.flow .s-elec .def b { font-size: 19px; }
+body.flow .s-elec .def span { font-size: 15px; }
+body.flow .s-elec .def .sym { width: 42px; height: 42px; font-size: 20px; }
+body.flow .s-elec .def { grid-template-columns: 42px 1fr; }
+body.flow .srow { grid-template-columns: 92px 1fr 64px; gap: 10px; }
+body.flow .srow label { font-size: 15px; }
+body.flow .srow b { font-size: 16px; }
+body.flow .irow b { font-size: 24px; }
+body.flow .irow span { font-size: 14px; }
+body.flow .s-elec #circuitSvg { height: auto; }
+body.flow .nopower { font-size: 16px; }
+body.flow .subline { font-size: 17px; }
+body.flow .elist li { font-size: 17px; grid-template-columns: 34px 1fr; gap: 12px; }
+body.flow .elist .ic { width: 34px; height: 34px; }
+body.flow .s-trans .tr-demo svg { height: auto; }
+@media (max-height: 520px) and (min-width: 640px) {
+  body.flow .s-elec .body { grid-template-columns: 1fr 1fr !important; align-items: start; }
+}

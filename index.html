@@ -173,17 +173,73 @@
       </div>
     </section>
     <!-- =================================================
-         SPEAKER 2 · SLIDE 3 — ELECTRICITY & TRANSISTORS
+         SPEAKER 2 · SLIDE 3 — ELECTRICITY: THE POWER BEHIND COMPUTERS
+         ================================================= -->
+    <section class="slide s-elec" data-speaker="2" data-module="elec">
+      <div class="eyebrow rv">Part 2 · Electricity</div>
+      <h2 class="rv" style="--i:1">Electricity: The <span class="hl">Power</span> Behind Computers</h2>
+      <div class="body">
+        <div class="elec-left">
+          <p class="lead rv" style="--i:2"><svg><use href="#i-bolt"/></svg><span>Electricity is the <b>basic energy source</b> of every computer. Computers need electrical power to perform different tasks.</span></p>
+          <div class="defs">
+            <div class="def card rv" style="--i:3"><div class="sym">V</div><div><b>Voltage</b><span>Pushes electricity through a circuit</span></div></div>
+            <div class="def card rv" style="--i:4"><div class="sym">I</div><div><b>Current</b><span>The flow of electric charge</span></div></div>
+            <div class="def card rv" style="--i:5"><div class="sym">R</div><div><b>Resistance</b><span>Controls the flow of electricity</span></div></div>
+          </div>
+          <div class="meter card rv" style="--i:6">
+            <div class="srow"><label for="voltSlider">Voltage</label><input type="range" id="voltSlider" min="0" max="12" step="0.5" value="6"><b id="vOut">6.0 V</b></div>
+            <div class="srow"><label for="resSlider">Resistance</label><input type="range" id="resSlider" min="2" max="20" step="1" value="10"><b id="rOut">10 Ω</b></div>
+            <div class="irow"><span>Current = Voltage ÷ Resistance</span><b id="iOut">0.60 A</b></div>
+          </div>
+        </div>
+        <div class="circuit rv" style="--i:3">
+          <svg viewBox="0 0 860 600" id="circuitSvg" aria-label="Animated circuit with battery, resistor, CPU, memory and light">
+            <path class="wire" id="loopPath" d="M140 120 H720 Q740 120 740 140 V460 Q740 480 720 480 H140 Q120 480 120 460 V140 Q120 120 140 120 Z"/>
+            <path class="wire-glow" d="M140 120 H720 Q740 120 740 140 V460 Q740 480 720 480 H140 Q120 480 120 460 V140 Q120 120 140 120 Z"/>
+            <g id="charges"></g>
+            <!-- battery -->
+            <rect class="part" x="70" y="230" width="100" height="140" rx="14"/>
+            <rect x="105" y="220" width="30" height="12" rx="3" fill="#33456F"/>
+            <text x="120" y="285" text-anchor="middle" font-size="30">+</text>
+            <text x="120" y="345" text-anchor="middle" font-size="30">−</text>
+            <text class="sm" x="186" y="306" text-anchor="start">BATTERY</text>
+            <!-- resistor -->
+            <rect x="210" y="456" width="120" height="48" fill="var(--bg)"/>
+            <path class="resistor" d="M200 480 H220 L230 462 L245 498 L260 462 L275 498 L290 462 L305 498 L315 480 H340"/>
+            <text class="sm" x="270" y="540" text-anchor="middle">RESISTOR</text>
+            <!-- cpu -->
+            <rect class="part" id="cpuBox" x="350" y="70" width="140" height="100" rx="14"/>
+            <text x="420" y="128" text-anchor="middle" id="cpuTxt">CPU</text>
+            <text class="sm" x="420" y="56" text-anchor="middle">PROCESSOR</text>
+            <!-- ram -->
+            <rect class="part" x="690" y="240" width="100" height="120" rx="12"/>
+            <path d="M708 330 v18 M724 330 v18 M740 330 v18 M756 330 v18 M772 330 v18" stroke="#33456F" stroke-width="4"/>
+            <text x="740" y="300" text-anchor="middle">RAM</text>
+            <text class="sm" x="674" y="306" text-anchor="end">MEMORY</text>
+            <!-- led -->
+            <circle id="ledGlow" cx="520" cy="480" r="60" fill="var(--cyan)" opacity=".3" style="filter:blur(18px)"/>
+            <circle class="part" id="led" cx="520" cy="480" r="38"/>
+            <text class="sm" x="520" y="550" text-anchor="middle">LIGHT</text>
+          </svg>
+          <div class="nopower" id="noPower"><svg><use href="#i-bolt"/></svg><span id="noPowerTxt">Without electricity, computers cannot function.</span></div>
+        </div>
+      </div>
+    </section>
+    <!-- =================================================
+         SPEAKER 2 · SLIDE 4 — ELECTRONICS: HOW COMPUTERS UNDERSTAND ELECTRICITY
          ================================================= -->
     <section class="slide s-trans" data-speaker="2" data-module="trans">
-      <div class="eyebrow rv">Part 2 · Electricity &amp; electronics</div>
-      <h2 class="rv" style="--i:1">Electricity and <span class="hl">Transistors</span></h2>
+      <div class="eyebrow rv">Part 2 · Electronics</div>
+      <h2 class="rv" style="--i:1">Electronics: How Computers <span class="hl">Understand</span> Electricity</h2>
+      <p class="subline rv" style="--i:1">Physics makes <b>faster, smaller, and smarter</b> computers possible.</p>
       <div class="body">
         <div class="top">
-          <ul class="points rv" style="--i:2">
-            <li><span class="ic"><svg><use href="#i-bolt"/></svg></span><span><b>Voltage</b> = the push. <b>Current</b> = the flow.<small>Like water pressure and water flow in a pipe</small></span></li>
-            <li><span class="ic"><svg><use href="#i-switch"/></svg></span><span>A transistor is a <b class="hl">tiny electric switch.</b></span></li>
-            <li><span class="ic">1</span><span>ON → current flows → <b class="hl">1</b><br>OFF → no current → <b>0</b><small>A phone chip has billions of transistors.</small></span></li>
+          <ul class="elist rv" style="--i:2">
+            <li><span class="ic"><svg><use href="#i-gate"/></svg></span><span>Electronic components <b>control the flow</b> of electricity.</span></li>
+            <li><span class="ic"><svg><use href="#i-switch"/></svg></span><span><b class="hl">Transistors:</b> act like tiny electronic switches.</span></li>
+            <li><span class="ic"><svg><use href="#i-chip"/></svg></span><span><b class="hl">Microchips:</b> contain millions or billions of tiny transistors.</span></li>
+            <li><span class="ic">1/0</span><span>Computers use <b>ON (1)</b> and <b>OFF (0)</b> signals to process information.</span></li>
+            <li><span class="ic"><svg><use href="#i-bolt"/></svg></span><span>Electrical circuits help the <b>CPU</b> perform calculations.</span></li>
           </ul>
           <div class="tr-demo card rv" id="trDemo" style="--i:3">
             <svg viewBox="0 0 520 280" aria-label="Transistor diagram">
@@ -213,76 +269,11 @@
           </div>
         </div>
         <div class="byte card rv" style="--i:4">
-          <h4>8 switches = 1 byte<small>Click the switches</small></h4>
+          <h4>8 ON/OFF signals = 1 byte<small>Click the switches</small></h4>
           <div class="bits" id="bits"></div>
           <div class="byte-out">
             <div class="readout"><small>Number</small><b id="byteNum">65</b></div>
             <div class="readout letter"><small>Letter</small><b id="byteChar">A</b></div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- =================================================
-         SPEAKER 2 · SLIDE 4 — LOGIC GATES
-         ================================================= -->
-    <section class="slide s-gates" data-speaker="2">
-      <div class="eyebrow rv">Part 2 · Digital electronics</div>
-      <h2 class="rv" style="--i:1">Logic Gates: <span class="hl">Simple Decisions</span></h2>
-      <div class="body">
-        <div class="gate-tabs">
-          <button class="gate-tab rv on" style="--i:2" data-gate="AND">
-            <svg viewBox="0 0 92 56"><path d="M4 18h18M4 38h18M70 28h18"/><path d="M22 6h22a22 22 0 0 1 0 44H22z"/></svg>
-            <span><b>AND</b><span>1 only if <b>both</b> inputs are 1</span></span>
-          </button>
-          <button class="gate-tab rv" style="--i:3" data-gate="OR">
-            <svg viewBox="0 0 92 56"><path d="M4 18h22M4 38h22M72 28h16"/><path d="M18 6q14 22 0 44q34 0 54-22q-20-22-54-22z"/></svg>
-            <span><b>OR</b><span>1 if <b>any</b> input is 1</span></span>
-          </button>
-          <button class="gate-tab rv" style="--i:4" data-gate="NOT">
-            <svg viewBox="0 0 92 56"><path d="M4 28h20M70 28h18"/><path d="M24 8l38 20-38 20z"/><circle cx="66" cy="28" r="4"/></svg>
-            <span><b>NOT</b><span>Gives the <b>opposite</b></span></span>
-          </button>
-        </div>
-
-        <div class="gate-lab card rv" style="--i:3">
-          <div class="gate-stage">
-            <div class="inputs" id="gateInputs">
-              <button class="inbtn" id="inA" aria-pressed="false"><span class="v">0</span><span>A</span></button>
-              <button class="inbtn" id="inB" aria-pressed="false"><span class="v">0</span><span>B</span></button>
-            </div>
-            <svg class="gate-svg" viewBox="0 0 620 300" preserveAspectRatio="xMinYMid meet" aria-label="Logic gate diagram">
-              <!-- AND -->
-              <g class="g show" data-g="AND">
-                <path class="w wa" d="M0 75 H150 V100 H232"/>
-                <path class="w wb" d="M0 225 H150 V200 H232"/>
-                <path class="w wo" d="M370 150 H500"/>
-                <path class="shape" d="M230 80 H300 A70 70 0 0 1 300 220 H230 Z"/>
-                <text class="gname" x="285" y="160" text-anchor="middle">AND</text>
-              </g>
-              <!-- OR -->
-              <g class="g" data-g="OR">
-                <path class="w wa" d="M0 75 H150 V105 H250"/>
-                <path class="w wb" d="M0 225 H150 V195 H250"/>
-                <path class="w wo" d="M375 150 H500"/>
-                <path class="shape" d="M222 80 Q262 150 222 220 Q320 220 378 150 Q320 80 222 80 Z"/>
-                <text class="gname" x="300" y="160" text-anchor="middle">OR</text>
-              </g>
-              <!-- NOT -->
-              <g class="g" data-g="NOT">
-                <path class="w wa" d="M0 150 H232"/>
-                <path class="w wo" d="M368 150 H500"/>
-                <path class="shape" d="M232 85 L342 150 L232 215 Z"/>
-                <circle class="shape" cx="354" cy="150" r="12"/>
-                <text class="gname" x="270" y="160" text-anchor="middle">NOT</text>
-              </g>
-              <circle class="lamp" id="gLamp" cx="548" cy="150" r="44"/>
-              <text class="outv" id="gOutV" x="548" y="162" text-anchor="middle">0</text>
-              <text class="olbl" x="548" y="226" text-anchor="middle">OUTPUT</text>
-            </svg>
-          </div>
-          <div class="gate-bottom">
-            <p class="example" id="gateExample"></p>
-            <table class="truth" id="truth" aria-label="Truth table"></table>
           </div>
         </div>
       </div>

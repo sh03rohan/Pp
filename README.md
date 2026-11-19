@@ -27,14 +27,14 @@ No internet and no server are needed. The fonts are included in the files.
 | Speaker | Slides | Topic |
 |---|---|---|
 | Habibullah Babar | 1–2 | Title and introduction · Physics + CSE: why they connect |
-| Shammy Sultana | 3–4 | Electricity and transistors (binary) · Logic gates |
+| Shammy Sultana | 3–4 | Electricity: the power behind computers · Electronics: how computers understand electricity |
 | Hridoy Dhar | 5–6 | Light and waves (fiber optics + wireless) · Sensors and robots |
 | Sakibul Hasan Rohan | 7–8 | Quantum computing · Future technology and conclusion |
 
 ## Interactive parts (try them before class)
 - **Slide 2:** click the 4 steps to light up each part of the computer.
-- **Slide 3:** click the big ON/OFF switch, then click the 8 bit tiles (01000001 = "A").
-- **Slide 4:** choose AND / OR / NOT, then click inputs A and B. The truth table highlights the current row.
+- **Slide 3:** move the Voltage and Resistance sliders. The current changes (I = V ÷ R), the charges speed up or slow down, and the light gets brighter or dimmer. Set Voltage to 0 and the computer turns OFF.
+- **Slide 4:** click the big ON/OFF switch, then click the 8 bit tiles (01000001 = "A").
 - **Slide 5:** type a short word (up to 5 letters) and click **Send**. It travels as light flashes.
 - **Slide 6:** move the box. The robot measures the echo and stops when the box is too close.
 - **Slide 7:** click **Measure**. Each click measures a new qubit and gives 0 or 1.

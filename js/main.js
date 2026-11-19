@@ -296,51 +296,47 @@
   })();
 
   /* ==========================================================
-     Slide 6 — Logic gates
+     Electricity: moving charges + Ohm's law (V and R sliders)
      ========================================================== */
   (function () {
-    const tabs = $$(".gate-tab");
-    const groups = $$(".gate-svg .g");
-    const inA = $("#inA"), inB = $("#inB");
-    const lamp = $("#gLamp"), outV = $("#gOutV");
-    const examples = {
-      AND: "<b>Example:</b> A door opens only if you have the key <b>AND</b> the password.",
-      OR: "<b>Example:</b> A room light turns on if switch A <b>OR</b> switch B is on.",
-      NOT: "<b>Example:</b> If it is <b>NOT</b> day, the street light turns on."
-    };
-    const fn = { AND: (a, b) => a & b, OR: (a, b) => a | b, NOT: (a) => a ^ 1 };
-    let gate = "AND", A = 0, B = 0;
-    function render() {
-      tabs.forEach((t) => t.classList.toggle("on", t.dataset.gate === gate));
-      groups.forEach((g) => g.classList.toggle("show", g.dataset.g === gate));
-      const single = gate === "NOT";
-      inB.classList.toggle("hide", single);
-      $("#gateInputs").style.gridTemplateRows = single ? "1fr" : "";
-      inB.style.display = single ? "none" : "";
-      const out = fn[gate](A, B);
-      [[inA, A], [inB, B]].forEach(([el, v]) => { el.classList.toggle("on", !!v); el.querySelector(".v").textContent = v; el.setAttribute("aria-pressed", !!v); });
-      const g = groups.find((x) => x.dataset.g === gate);
-      g.querySelector(".wa").classList.toggle("on", !!A);
-      const wb = g.querySelector(".wb"); if (wb) wb.classList.toggle("on", !!B);
-      g.querySelector(".wo").classList.toggle("on", !!out);
-      lamp.classList.toggle("on", !!out);
-      outV.classList.toggle("on", !!out);
-      outV.textContent = out;
-      $("#gateExample").innerHTML = examples[gate];
-      // truth table
-      const rows = single ? [[0], [1]] : [[0, 0], [0, 1], [1, 0], [1, 1]];
-      let html = `<tr><th>A</th>${single ? "" : "<th>B</th>"}<th>OUT</th></tr>`;
-      rows.forEach((r) => {
-        const o = fn[gate](r[0], r[1]);
-        const cur = r[0] === A && (single || r[1] === B);
-        html += `<tr class="${cur ? "cur" : ""}"><td>${r[0]}</td>${single ? "" : `<td>${r[1]}</td>`}<td>${o}</td></tr>`;
-      });
-      $("#truth").innerHTML = html;
+    const path = $("#loopPath");
+    const g = $("#charges");
+    const vS = $("#voltSlider"), rS = $("#resSlider");
+    const led = $("#led"), ledGlow = $("#ledGlow");
+    const box = $("#circuitSvg").parentElement;
+    const N = 34;
+    let L = 0, offset = 0, current = 0.6;
+    const dots = [];
+    L = path.getTotalLength();
+    for (let k = 0; k < N; k++) { const c = svgEl("circle", { r: 6, class: "charge" }); g.appendChild(c); dots.push(c); }
+    function update() {
+      const V = +vS.value, R = +rS.value;
+      current = V / R;
+      $("#vOut").textContent = V.toFixed(1) + " V";
+      $("#rOut").textContent = R + " Ω";
+      $("#iOut").textContent = current.toFixed(2) + " A";
+      const k = Math.min(1, current / 1.2);
+      led.style.fill = k === 0 ? "" : `rgba(233, 251, 255, ${0.25 + 0.75 * k})`;
+      ledGlow.setAttribute("opacity", (0.6 * k).toFixed(2));
+      ledGlow.setAttribute("r", 40 + 40 * k);
+      dots.forEach((d) => d.setAttribute("opacity", k === 0 ? 0.3 : 1));
+      const off = V === 0;
+      box.classList.toggle("powered", !off);
+      $("#cpuTxt").textContent = off ? "OFF" : "CPU";
+      $("#noPower").classList.toggle("off", off);
+      $("#noPowerTxt").textContent = off ? "No electricity → the computer cannot function." : "Without electricity, computers cannot function.";
     }
-    tabs.forEach((t) => t.addEventListener("click", () => { gate = t.dataset.gate; render(); }));
-    inA.addEventListener("click", () => { A ^= 1; render(); });
-    inB.addEventListener("click", () => { B ^= 1; render(); });
-    render();
+    vS.addEventListener("input", update);
+    rS.addEventListener("input", update);
+    const lp = loop((dt) => {
+      offset = (offset + dt * Math.min(current, 2.4) * 260) % L;
+      for (let k = 0; k < N; k++) {
+        const p = path.getPointAtLength((offset + (k * L) / N) % L);
+        dots[k].setAttribute("cx", p.x); dots[k].setAttribute("cy", p.y);
+      }
+    });
+    update();
+    modules.elec = { enter() { lp.start(); }, leave() { lp.stop(); } };
   })();
 
   /* ==========================================================

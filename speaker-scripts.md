@@ -2,7 +2,7 @@
 
 **Importance and Applications of Physics in Computer Science and Engineering (CSE)**
 
-4 speakers · 8 slides · about 2 minutes each · 758 words in total
+4 speakers · 8 slides · about 2 minutes each · 762 words in total
 
 Tip: speak slowly and clearly. A calm pace is about 105 words per minute.
 
@@ -28,19 +28,19 @@ First, what is Physics? Physics is the study of energy, force, light, and matter
 
 ## Shammy Sultana — Electricity & Electronics
 
-Slides 3–4 · 192 words · about 1:50
+Slides 3–4 · 197 words · about 1:53
 
-### Slide 3: Electricity and Transistors
+### Slide 3: Electricity: The Power Behind Computers
 
-Thank you, Habibullah. Hello, everyone. I am Shammy Sultana. Electricity is the flow of tiny charged particles called electrons. Voltage is the push, and current is the flow. It is like water in a pipe. Inside every computer chip, there are transistors. A transistor is a tiny electric switch. When the switch is ON, current flows, and we call it one. When it is OFF, no current flows, and we call it zero. Now look at these eight switches. Together, they make one byte. Zero, one, zero, zero, zero, zero, zero, one means the letter A. A modern phone chip has billions of transistors.
+Thank you, Habibullah. Hello, everyone. I am Shammy Sultana. Electricity is the basic energy source of every computer. Computers need electrical power to do every task, like opening an app or playing a video. There are three important words. Voltage pushes electricity through a circuit. Current is the flow of electric charge. Resistance controls the flow of electricity. Look at this circuit. When I increase the voltage, more current flows. When I increase the resistance, less current flows. And when there is no voltage, nothing works. Without electricity, computers cannot function.
+
+*Action: Move the Voltage slider up, then move the Resistance slider up. At the end, move Voltage to 0 to show the computer turn OFF.*
+
+### Slide 4: Electronics: How Computers Understand Electricity
+
+Now, how do computers understand electricity? The answer is electronics. Electronic components control the flow of electricity. The most important one is the transistor. A transistor acts like a tiny electronic switch. When it is ON, we call it one. When it is OFF, we call it zero. Computers use these ON and OFF signals to process information. For example, these eight switches make the letter A. A microchip contains millions or even billions of tiny transistors. These electrical circuits help the CPU perform calculations. Physics makes faster, smaller, and smarter computers possible. Now, Hridoy Dhar will show you how Physics helps us in real life.
 
 *Action: Click the big switch to show ON and OFF. Then point to the eight switches that make the letter A.*
-
-### Slide 4: Logic Gates: Simple Decisions
-
-We can connect transistors to make logic gates. A logic gate makes a simple decision. An AND gate gives one only when both inputs are one. An OR gate gives one when any input is one. A NOT gate gives the opposite. When I change the inputs, the output changes at once. Computers use millions of these gates to add numbers and make decisions. For example, a calculator uses logic gates to add two numbers. Now, Hridoy Dhar will show you how Physics helps us in real life.
-
-*Action: Choose AND, OR, and NOT. Click input A and input B to show the output change.*
 
 ---
 
@@ -64,7 +64,7 @@ Now, sensors and robots. A sensor helps a machine feel the world. It can detect 
 
 ## Sakibul Hasan Rohan — Future & Conclusion
 
-Slides 7–8 · 185 words · about 1:46
+Slides 7–8 · 184 words · about 1:45
 
 ### Slide 7: Quantum Computing
 
@@ -74,7 +74,7 @@ Thank you, Hridoy. Hello, everyone. I am Sakibul Hasan Rohan. Let's look at the 
 
 ### Slide 8: The Future and Conclusion
 
-Physics will also improve other technologies, like smart robots, Virtual Reality, Augmented Reality, and smaller, faster computer chips. These ideas start in Physics labs and become products for everyone. To conclude, Physics is the base of Computer Science and Engineering. Electricity powers our computers. Transistors and logic gates help them think. Light and waves connect us. Sensors help machines understand the world. Physics explains how nature works, and CSE turns that knowledge into technology. Remember this: behind every great computer, there is great Physics. Thank you for listening. Do you have any questions?
+Physics will also improve other technologies, like smart robots, Virtual Reality, Augmented Reality, and smaller, faster computer chips. These ideas start in Physics labs and become products for everyone. To conclude, Physics is the base of Computer Science and Engineering. Electricity powers our computers. Transistors and microchips help them think. Light and waves connect us. Sensors help machines understand the world. Physics explains how nature works, and CSE turns that knowledge into technology. Remember this: behind every great computer, there is great Physics. Thank you for listening. Do you have any questions?
 
 *Action: Point to the four cards. Then slow down, say the last sentence clearly, and invite questions.*
 
