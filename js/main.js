@@ -72,7 +72,8 @@
   function go(n) {
     n = Math.max(0, Math.min(TOTAL - 1, n));
     const prev = current;
-    if (modules[prev] && modules[prev].leave && n !== prev) modules[prev].leave();
+    const mPrev = modules[slides[prev].dataset.module];
+    if (mPrev && mPrev.leave && n !== prev) mPrev.leave();
     current = n;
     slides.forEach((s, i) => {
       s.classList.toggle("active", i === n);
@@ -92,7 +93,8 @@
     $("#nextBtn").disabled = n === TOTAL - 1;
     if (history.replaceState) history.replaceState(null, "", "#" + (n + 1));
     renderNotes();
-    if (modules[n] && modules[n].enter) modules[n].enter();
+    const mNext = modules[slides[n].dataset.module];
+    if (mNext && mNext.enter) mNext.enter();
   }
   const next = () => go(current + 1);
   const prev = () => go(current - 1);
@@ -176,7 +178,7 @@
     const handoff = nextNote && nextNote.speaker !== n.speaker;
     const idxInSpeaker = NOTES.filter((x, i) => x.speaker === n.speaker && i <= current).length;
     $("#notesContent").innerHTML = `
-      <div class="n-speaker"><span class="num">${sp.id}</span><div><b>${sp.name}</b><span>${sp.topic} · slide ${idxInSpeaker} of 3</span></div></div>
+      <div class="n-speaker"><span class="num">${sp.id}</span><div><b>${sp.name}</b><span>${sp.topic} · slide ${idxInSpeaker} of ${NOTES.filter((x) => x.speaker === n.speaker).length}</span></div></div>
       <div class="n-title">Slide ${current + 1}: <b>${n.title}</b></div>
       <p class="n-script">${n.script}</p>
       <div class="n-cue">${n.cue}</div>
@@ -229,49 +231,10 @@
     }
     function auto() { clearInterval(timer); timer = setInterval(() => { if (!pinned) show((i + 1) % 4); }, 2600); }
     steps.forEach((s) => s.addEventListener("click", () => { pinned = true; show(+s.dataset.step); clearTimeout(s._t); s._t = setTimeout(() => (pinned = false), 6000); }));
-    modules[2] = {
+    modules.why = {
       enter() { pinned = false; show(0); auto(); },
       leave() { clearInterval(timer); }
     };
-  })();
-
-  /* ==========================================================
-     Slide 4 — Electricity: moving charges + Ohm's law
-     ========================================================== */
-  (function () {
-    const path = $("#loopPath");
-    const g = $("#charges");
-    const slider = $("#voltSlider");
-    const led = $("#led"), ledGlow = $("#ledGlow");
-    const R = 10;
-    const N = 34;
-    let L = 0, offset = 0, current = 0.6;
-    const dots = [];
-    function build() {
-      L = path.getTotalLength();
-      for (let k = 0; k < N; k++) { const c = svgEl("circle", { r: 6, class: "charge" }); g.appendChild(c); dots.push(c); }
-    }
-    function update() {
-      const V = +slider.value;
-      current = V / R;
-      $("#vOut").innerHTML = V.toFixed(1) + "<em>V</em>";
-      $("#iOut").innerHTML = current.toFixed(2) + "<em>A</em>";
-      const k = current / 1.2; // 0..1
-      led.style.fill = k === 0 ? "" : `rgba(233, 251, 255, ${0.25 + 0.75 * k})`;
-      ledGlow.setAttribute("opacity", (0.6 * k).toFixed(2));
-      ledGlow.setAttribute("r", 40 + 40 * k);
-      dots.forEach((d) => d.setAttribute("opacity", k === 0 ? 0.35 : 1));
-    }
-    slider.addEventListener("input", update);
-    const lp = loop((dt) => {
-      offset = (offset + dt * current * 260) % L;
-      for (let k = 0; k < N; k++) {
-        const p = path.getPointAtLength((offset + (k * L) / N) % L);
-        dots[k].setAttribute("cx", p.x); dots[k].setAttribute("cy", p.y);
-      }
-    });
-    build(); update();
-    modules[3] = { enter() { lp.start(); }, leave() { lp.stop(); } };
   })();
 
   /* ==========================================================
@@ -320,7 +283,7 @@
       $("#byteChar").textContent = n >= 33 && n <= 126 ? String.fromCharCode(n) : (n === 32 ? "space" : "–");
     }
     renderByte();
-    modules[4] = { enter() { lp.start(); }, leave() { lp.stop(); } };
+    modules.trans = { enter() { lp.start(); }, leave() { lp.stop(); } };
   })();
 
   /* ==========================================================
@@ -456,73 +419,23 @@
     });
 
     let autoT = null;
-    modules[6] = {
-      enter() { lp.start(); clearTimeout(autoT); autoT = setTimeout(send, 900); },
-      leave() { clearTimeout(autoT); lp.stop(); }
-    };
-    renderStream();
-  })();
-
-  /* ==========================================================
-     Slide 8 — Wireless: rings + packets between devices
-     ========================================================== */
-  (function () {
-    const tabs = $$("#wtabs .wtab");
-    const links = $$("#wifiSvg .link");
-    const emitters = $$("#wifiSvg .emitter");
-    const devs = $$("#wifiSvg .devg");
-    const pk = $("#packets");
+    // Travelling EM wave in the "Wireless" card
     const wave = $("#emWave");
-    let mode = "wifi", userPicked = false, autoT = null, phase = 0;
-    const packets = [];
-    const devMap = { wifi: ["wifi", "phone"], bt: ["phone", "bt"], mobile: ["mobile", "phone"] };
-
-    function setMode(m) {
-      mode = m;
-      tabs.forEach((t) => t.classList.toggle("on", t.dataset.w === m));
-      links.forEach((l) => l.classList.toggle("on", l.dataset.l === m));
-      emitters.forEach((e) => e.classList.toggle("on", e.dataset.e === m));
-      devs.forEach((d) => d.classList.toggle("dim", !devMap[m].includes(d.dataset.d)));
-      packets.forEach((p) => p.el.remove()); packets.length = 0;
-      links.filter((l) => l.dataset.l === m).forEach((l) => {
-        for (let k = 0; k < 3; k++) {
-          const el = svgEl("circle", { r: 7, class: "packet" });
-          pk.appendChild(el);
-          packets.push({ el, l, t: k / 3, back: false });
-        }
-      });
-    }
-    tabs.forEach((t) => t.addEventListener("click", () => { userPicked = true; setMode(t.dataset.w); }));
-
-    const speeds = { wifi: 0.55, bt: 0.8, mobile: 0.35 };
-    const lp = loop((dt) => {
-      packets.forEach((p) => {
-        p.t += dt * speeds[mode];
-        if (p.t > 1) p.t -= 1;
-        const x1 = +p.l.getAttribute("x1"), y1 = +p.l.getAttribute("y1"), x2 = +p.l.getAttribute("x2"), y2 = +p.l.getAttribute("y2");
-        p.el.setAttribute("cx", x1 + (x2 - x1) * p.t);
-        p.el.setAttribute("cy", y1 + (y2 - y1) * p.t);
-        p.el.setAttribute("opacity", Math.sin(Math.PI * p.t).toFixed(2));
-      });
-      // travelling sine wave
+    let phase = 0;
+    const wl = loop((dt) => {
       phase += dt * 4;
       let d = "";
       for (let x = 20; x <= 280; x += 4) {
-        const y = 68 + 22 * Math.sin((x - 40) / 100 * 2 * Math.PI - phase);
+        const y = 55 + 26 * Math.sin(((x - 40) / 100) * 2 * Math.PI - phase);
         d += (x === 20 ? "M" : "L") + x + " " + y.toFixed(1);
       }
       wave.setAttribute("d", d);
     });
-    setMode("wifi");
-    modules[7] = {
-      enter() {
-        lp.start(); userPicked = false; setMode("wifi");
-        clearInterval(autoT);
-        const order = ["wifi", "bt", "mobile"];
-        autoT = setInterval(() => { if (!userPicked) setMode(order[(order.indexOf(mode) + 1) % 3]); }, 4500);
-      },
-      leave() { lp.stop(); clearInterval(autoT); }
+    modules.comm = {
+      enter() { lp.start(); wl.start(); clearTimeout(autoT); autoT = setTimeout(send, 900); },
+      leave() { clearTimeout(autoT); lp.stop(); wl.stop(); }
     };
+    renderStream();
   })();
 
   /* ==========================================================
@@ -605,7 +518,7 @@
       distText.textContent = measured === null ? "measuring…" : `Distance: ${Math.round(measured)} cm`;
       distText.style.fill = measured !== null && measured <= STOP_CM ? "var(--stop)" : "";
     });
-    modules[8] = { enter() { reset(); lp.start(); }, leave() { lp.stop(); } };
+    modules.robot = { enter() { reset(); lp.start(); }, leave() { lp.stop(); } };
   })();
 
   /* ==========================================================
@@ -657,23 +570,7 @@
       $("#qResult").innerHTML = `Result: <b>?</b><br><span>0s: 0 · 1s: 0</span>`;
     });
     draw();
-    modules[9] = { enter() { lp.start(); }, leave() { lp.stop(); } };
-  })();
-
-  /* ==========================================================
-     Slide 12 — Conclusion: light the recap chain in order
-     ========================================================== */
-  (function () {
-    const items = $$("#recap .rc");
-    let timers = [];
-    modules[11] = {
-      enter() {
-        items.forEach((i) => i.classList.remove("lit"));
-        timers.forEach(clearTimeout);
-        timers = items.map((it, k) => setTimeout(() => it.classList.add("lit"), 700 + k * 350));
-      },
-      leave() { timers.forEach(clearTimeout); }
-    };
+    modules.quantum = { enter() { lp.start(); }, leave() { lp.stop(); } };
   })();
 
   /* ---------- Start ---------- */

@@ -20,7 +20,7 @@ const grand = parts.reduce((a, p) => a + p.total, 0);
 
 /* ---------- Markdown ---------- */
 let md = `# Speaker Scripts\n\n**Importance and Applications of Physics in Computer Science and Engineering (CSE)**\n\n`;
-md += `4 speakers · 12 slides · about 2 minutes each · ${grand} words in total\n\n`;
+md += `${SPEAKERS.length} speakers · ${NOTES.length} slides · about 2 minutes each · ${grand} words in total\n\n`;
 md += `Tip: speak slowly and clearly. A calm pace is about ${WPM} words per minute.\n\n`;
 parts.forEach(({ sp, slides, total }) => {
   md += `---\n\n## ${sp.name} — ${sp.topic}\n\nSlides ${slides[0].num}–${slides[slides.length - 1].num} · ${total} words · about ${fmt((total / WPM) * 60)}\n\n`;
@@ -57,7 +57,7 @@ h1{font-size:34px;line-height:1.15;margin:8px 0 10px;font-weight:800;letter-spac
 @media print{body{background:#fff}main{padding:0}header{margin-bottom:14px;padding-bottom:12px}h1{font-size:26px}.speaker{margin:0;padding:20px 22px}.speaker{border:1px solid #ccd}.speaker+.speaker{break-before:page}}
 </style></head><body><main>
 <header><div class="kicker">Speaker Scripts</div><h1>Importance and Applications of Physics in Computer Science and Engineering (CSE)</h1>
-<div class="meta">4 speakers · 12 slides · about 2 minutes each · ${grand} words in total · speak slowly (about ${WPM} words per minute)</div></header>`;
+<div class="meta">${SPEAKERS.length} speakers · ${NOTES.length} slides · about 2 minutes each · ${grand} words in total · speak slowly (about ${WPM} words per minute)</div></header>`;
 parts.forEach(({ sp, slides, total }, k) => {
   html += `<section class="speaker"><h2><span class="num">${sp.id}</span>${esc(sp.name)} — ${esc(sp.topic)}</h2>
 <div class="sub">Slides ${slides[0].num}–${slides[slides.length - 1].num} · ${total} words · about ${fmt((total / WPM) * 60)}</div>`;
