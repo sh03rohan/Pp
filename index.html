@@ -1,0 +1,761 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Physics in CSE</title>
+<meta name="description" content="Importance and Applications of Physics in Computer Science and Engineering — interactive class presentation.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Reusable icon symbols -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></symbol>
+    <symbol id="i-chip" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="10" y="10" width="4" height="4"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></g></symbol>
+    <symbol id="i-gate" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5h5a7 7 0 0 1 0 14H6z"/><path d="M18 12h4M2 9h4M2 15h4"/></g></symbol>
+    <symbol id="i-light" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></g></symbol>
+    <symbol id="i-wifi" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 9a15 15 0 0 1 20 0M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0"/><circle cx="12" cy="19.5" r="1"/></g></symbol>
+    <symbol id="i-bt" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 7 11 10-5 5V2l5 5L6 17"/></symbol>
+    <symbol id="i-tower" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 10v12M8 22l4-12 4 12"/><circle cx="12" cy="8" r="1.5"/><path d="M8 4.5a5 5 0 0 0 0 7M16 4.5a5 5 0 0 1 0 7M5 2a9 9 0 0 0 0 12M19 2a9 9 0 0 1 0 12"/></g></symbol>
+    <symbol id="i-robot" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 8V4"/><circle cx="12" cy="3" r="1"/><circle cx="9" cy="14" r="1.5"/><circle cx="15" cy="14" r="1.5"/></g></symbol>
+    <symbol id="i-atom" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="1.6" fill="currentColor"/><ellipse cx="12" cy="12" rx="10" ry="4"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)"/></g></symbol>
+    <symbol id="i-move" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20M9 5l3-3 3 3M9 19l3 3 3-3M5 9l-3 3 3 3M19 9l3 3-3 3"/></g></symbol>
+    <symbol id="i-echo" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="4" cy="12" r="1.5" fill="currentColor"/><path d="M8 8a6 6 0 0 1 0 8M12 5a10 10 0 0 1 0 14M16 2a14 14 0 0 1 0 20"/></g></symbol>
+    <symbol id="i-temp" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 14.8V4a2 2 0 0 0-4 0v10.8a4 4 0 1 0 4 0z"/><path d="M12 9v7"/></g></symbol>
+    <symbol id="i-fiber" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 8h20M2 16h20"/><path d="M2 12l4-3 4 6 4-6 4 6 4-3"/></g></symbol>
+    <symbol id="i-speed" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 14l5-5"/><path d="M3.3 19a10 10 0 1 1 17.4 0"/></g></symbol>
+    <symbol id="i-qubit" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="9" ry="3" stroke-dasharray="2 2"/><path d="M12 12l4-6"/><circle cx="16" cy="6" r="1.5" fill="currentColor"/></g></symbol>
+    <symbol id="i-switch" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="7" width="20" height="10" rx="5"/><circle cx="17" cy="12" r="3" fill="currentColor"/></g></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5 10 17 19 7"/></symbol>
+  </defs>
+</svg>
+
+<main class="viewport" id="viewport">
+  <div class="stage" id="stage" aria-live="polite">
+
+    <div class="progress"><span id="progressBar"></span></div>
+    <div class="topbar">
+      <div class="brand"><svg><use href="#i-atom" style="color:var(--cyan)"/></svg>Physics × CSE</div>
+      <div class="speaker-chip" id="speakerChip"><span class="num">1</span><span class="who">Speaker 1</span><span class="topic">Introduction</span></div>
+      <div class="counter" id="counter"><b>01</b> / 12</div>
+    </div>
+
+    <!-- =================================================
+         SPEAKER 1 · SLIDE 1 — TITLE
+         ================================================= -->
+    <section class="slide s-title" data-speaker="1">
+      <svg class="bg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <g id="titleTraces">
+          <path class="trace" d="M0 160 H220 L270 210 H520"/>
+          <path class="trace" d="M0 720 H160 L220 660 H420 L460 700 H700"/>
+          <path class="trace" d="M1600 120 H1380 L1330 170 H1140"/>
+          <path class="trace" d="M1600 780 H1420 L1360 840 H1100"/>
+          <path class="trace" d="M60 900 V820 L110 770 V560"/>
+          <path class="trace" d="M1540 0 V80 L1490 130 V300"/>
+          <path class="trace" d="M800 900 V850 L850 800 H1000"/>
+        </g>
+        <path class="flow pulse" d="M0 160 H220 L270 210 H520"/>
+        <path class="flow pulse" style="animation-delay:-1.2s" d="M0 720 H160 L220 660 H420 L460 700 H700"/>
+        <path class="flow pulse" style="animation-delay:-2.1s" d="M1600 120 H1380 L1330 170 H1140"/>
+        <path class="flow pulse" style="animation-delay:-.6s" d="M1600 780 H1420 L1360 840 H1100"/>
+        <path class="flow pulse" style="animation-delay:-1.8s" d="M60 900 V820 L110 770 V560"/>
+        <path class="flow pulse" style="animation-delay:-2.6s" d="M1540 0 V80 L1490 130 V300"/>
+        <circle class="pad" cx="520" cy="210" r="7"/><circle class="pad" cx="700" cy="700" r="7"/>
+        <circle class="pad" cx="1140" cy="170" r="7"/><circle class="pad" cx="1100" cy="840" r="7"/>
+        <circle class="pad" cx="110" cy="560" r="7"/><circle class="pad" cx="1490" cy="300" r="7"/>
+        <circle class="pad" cx="1000" cy="800" r="7"/>
+        <text class="sym" x="960" y="770" font-size="34">Ω</text>
+        <text class="sym" x="1530" y="660" font-size="30" style="animation-delay:-3s">λ</text>
+        <text class="sym" x="1180" y="760" font-size="26" style="animation-delay:-5s">V = I × R</text>
+        <text class="sym" x="640" y="770" font-size="26" style="animation-delay:-2s">E = hf</text>
+        <text class="sym" x="1120" y="140" font-size="24" style="animation-delay:-6s">F = ma</text>
+        <text class="bits" x="170" y="110">1 0 1 1 0 0 1 0</text>
+        <text class="bits" x="720" y="150">0 1 0 0 0 0 0 1</text>
+      </svg>
+
+      <div class="wrap">
+        <div>
+          <div class="eyebrow rv" style="--i:0">Class Presentation</div>
+          <h1 class="rv" style="--i:1"><span class="small">Importance and Applications of</span><span class="hl">Physics</span> in Computer Science and Engineering</h1>
+          <p class="sub rv" style="--i:2">Understanding the science behind computer technology</p>
+          <div class="team rv" style="--i:3">
+            <div class="member"><b>1</b><span>Speaker 1<em>Introduction</em></span></div>
+            <div class="member"><b>2</b><span>Speaker 2<em>Electronics</em></span></div>
+            <div class="member"><b>3</b><span>Speaker 3<em>Applications</em></span></div>
+            <div class="member"><b>4</b><span>Speaker 4<em>Future</em></span></div>
+          </div>
+        </div>
+        <svg class="emblem rv" style="--i:2" viewBox="0 0 470 470" aria-hidden="true">
+          <g class="spin1"><ellipse class="orbit" cx="235" cy="235" rx="215" ry="80"/><circle class="electron" cx="450" cy="235" r="9"/></g>
+          <g class="spin2"><ellipse class="orbit" cx="235" cy="235" rx="215" ry="80" transform="rotate(60 235 235)"/><circle class="electron" cx="235" cy="155" r="8" transform="rotate(60 235 235)"/></g>
+          <g class="spin3"><ellipse class="orbit" cx="235" cy="235" rx="215" ry="80" transform="rotate(120 235 235)"/><circle class="electron" cx="20" cy="235" r="8" transform="rotate(120 235 235)"/></g>
+          <g>
+            <path class="pin" d="M190 150v-22M220 150v-22M250 150v-22M280 150v-22M190 320v22M220 320v22M250 320v22M280 320v22M150 190h-22M150 220h-22M150 250h-22M150 280h-22M320 190h22M320 220h22M320 250h22M320 280h22"/>
+            <rect class="chip" x="150" y="150" width="170" height="170" rx="22"/>
+            <rect x="185" y="185" width="100" height="100" rx="12" fill="#0A1530" stroke="#24396B" stroke-width="2"/>
+            <circle class="core" cx="235" cy="235" r="22"/>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <!-- =================================================
+         SPEAKER 1 · SLIDE 2 — WHAT ARE PHYSICS AND CSE
+         ================================================= -->
+    <section class="slide s-what" data-speaker="1">
+      <div class="eyebrow rv">Part 1 · The basics</div>
+      <h2 class="rv" style="--i:1">What Are <span class="hl">Physics</span> and <span class="hl-b">CSE</span>?</h2>
+      <div class="body">
+        <div class="card rv" style="--i:2">
+          <svg class="icon atom" viewBox="0 0 120 120" aria-hidden="true">
+            <g class="spin1" style="transform-origin:60px 60px"><ellipse class="ring" cx="60" cy="60" rx="54" ry="20"/><circle class="e" cx="114" cy="60" r="6"/></g>
+            <g class="spin2" style="transform-origin:60px 60px"><ellipse class="ring" cx="60" cy="60" rx="54" ry="20" transform="rotate(60 60 60)"/></g>
+            <g class="spin3" style="transform-origin:60px 60px"><ellipse class="ring" cx="60" cy="60" rx="54" ry="20" transform="rotate(120 60 60)"/></g>
+            <circle class="nuc" cx="60" cy="60" r="11"/>
+          </svg>
+          <h3>Physics</h3>
+          <p>The study of energy, force, light, and matter.</p>
+          <p class="muted">It explains <b>how nature works.</b></p>
+          <div class="tags"><span class="tag">Energy</span><span class="tag">Force</span><span class="tag">Light</span><span class="tag">Matter</span></div>
+        </div>
+
+        <div class="bridge rv" style="--i:3">
+          <div class="lbl"><b>Physics</b> gives the rules</div>
+          <svg viewBox="0 0 380 260" aria-hidden="true">
+            <path d="M20 90 H360" stroke="#1E3463" stroke-width="10" stroke-linecap="round"/>
+            <path d="M20 90 H360" stroke="var(--cyan)" stroke-width="4" stroke-linecap="round" stroke-dasharray="10 26" style="animation:dashFlow 1s linear infinite reverse"/>
+            <path d="M340 72 L362 90 L340 108" fill="none" stroke="var(--cyan)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M360 170 H20" stroke="#1E3463" stroke-width="10" stroke-linecap="round"/>
+            <path d="M360 170 H20" stroke="var(--blue)" stroke-width="4" stroke-linecap="round" stroke-dasharray="10 26" style="animation:dashFlow 1.3s linear infinite reverse"/>
+            <path d="M40 152 L18 170 L40 188" fill="none" stroke="var(--blue)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="190" cy="130" r="34" fill="var(--panel-2)" stroke="var(--line-2)" stroke-width="2"/>
+            <text x="190" y="140" text-anchor="middle" fill="#fff" font-family="Inter, sans-serif" font-weight="800" font-size="30">+</text>
+          </svg>
+          <div class="lbl"><b>CSE</b> uses them to build</div>
+          <div class="equation">Physics + CSE = <span class="hl">Technology</span></div>
+        </div>
+
+        <div class="card rv" style="--i:4">
+          <svg class="icon" viewBox="0 0 120 120" aria-hidden="true">
+            <rect x="10" y="18" width="100" height="70" rx="10" fill="var(--panel-2)" stroke="var(--blue)" stroke-width="3"/>
+            <path d="M40 104 H80 M60 88 V104" stroke="var(--blue)" stroke-width="3" stroke-linecap="round"/>
+            <path d="M36 42 L26 53 L36 64 M84 42 L94 53 L84 64" fill="none" stroke="var(--cyan)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M66 38 L54 68" stroke="var(--cyan)" stroke-width="3.5" stroke-linecap="round"/>
+            <rect x="46" y="72" width="28" height="3" fill="var(--cyan)" style="animation:blink 1s steps(1) infinite"/>
+          </svg>
+          <h3>CSE</h3>
+          <p>The study of computers, software, and hardware.</p>
+          <p class="muted">It helps us <b>build smart machines.</b></p>
+          <div class="tags"><span class="tag">Software</span><span class="tag">Hardware</span><span class="tag">Networks</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================
+         SPEAKER 1 · SLIDE 3 — WHY PHYSICS IS IMPORTANT
+         ================================================= -->
+    <section class="slide s-why" data-speaker="1">
+      <div class="eyebrow rv">Part 1 · The connection</div>
+      <h2 class="rv" style="--i:1">Why Is Physics <span class="hl">Important</span> in CSE?</h2>
+      <div class="body">
+        <div>
+          <ul class="points rv" style="--i:2">
+            <li><span class="ic"><svg><use href="#i-check"/></svg></span>Every part of a computer works because of Physics.</li>
+            <li><span class="ic"><svg><use href="#i-check"/></svg></span>No Physics = no electricity, no chips, no internet.</li>
+          </ul>
+          <div class="steps rv" style="--i:3" id="whySteps">
+            <button class="step" data-step="0"><span class="n">1</span><span><b>Electricity</b><span>Gives power</span></span></button>
+            <button class="step" data-step="1"><span class="n">2</span><span><b>Hardware</b><span>Uses the power (CPU, memory)</span></span></button>
+            <button class="step" data-step="2"><span class="n">3</span><span><b>Signals</b><span>Carry information</span></span></button>
+            <button class="step" data-step="3"><span class="n">4</span><span><b>Computing</b><span>Gives the result</span></span></button>
+          </div>
+        </div>
+        <div class="pc rv" style="--i:3">
+          <svg viewBox="0 0 900 560" id="pcSvg" aria-label="Computer diagram with power, CPU, memory, signals and screen">
+            <rect class="board" x="20" y="80" width="580" height="440" rx="22"/>
+            <text x="44" y="116" fill="#3B4E7E" font-family="Inter, sans-serif" font-weight="700" font-size="16" letter-spacing="3">MOTHERBOARD</text>
+            <!-- decorative traces -->
+            <path d="M60 470 H260 M60 490 H300 M560 470 H420 M560 490 H380" stroke="#13244A" stroke-width="3"/>
+
+            <!-- 1 Power -->
+            <g class="comp" data-step="0">
+              <path class="wire" d="M200 395 H260 V300 H300"/>
+              <path class="flowline" d="M200 395 H260 V300 H300"/>
+              <rect class="box" x="50" y="330" width="150" height="130" rx="16"/>
+              <path class="ico" d="M131 352 L106 392 H126 L118 428 L146 384 H126 Z"/>
+              <text x="125" y="450" text-anchor="middle">POWER</text>
+            </g>
+            <!-- 2 Hardware -->
+            <g class="comp" data-step="1">
+              <path class="wire" d="M460 250 H500"/>
+              <path class="flowline" d="M460 250 H500"/>
+              <rect class="box" x="300" y="170" width="160" height="160" rx="16"/>
+              <rect x="340" y="210" width="80" height="80" rx="8" fill="none" stroke="#24396B" stroke-width="2"/>
+              <text x="380" y="258" text-anchor="middle">CPU</text>
+              <rect class="box" x="500" y="150" width="28" height="200" rx="6"/>
+              <rect class="box" x="540" y="150" width="28" height="200" rx="6"/>
+              <text x="534" y="380" text-anchor="middle">RAM</text>
+            </g>
+            <!-- 3 Signals -->
+            <g class="comp" data-step="2">
+              <path class="wire" d="M380 170 V120 H520 V40"/>
+              <path class="flowline" d="M380 170 V120 H520 V40"/>
+              <path class="wire" d="M600 250 H660"/>
+              <path class="flowline" d="M580 250 H660"/>
+              <circle cx="520" cy="34" r="8" fill="var(--panel-2)" stroke="var(--line-2)" stroke-width="2"/>
+              <path class="ico" d="M545 14 a30 30 0 0 1 0 40 M560 4 a46 46 0 0 1 0 60 M495 14 a30 30 0 0 0 0 40 M480 4 a46 46 0 0 0 0 60"/>
+              <text x="600" y="40">SIGNALS</text>
+            </g>
+            <!-- 4 Computing -->
+            <g class="comp" data-step="3">
+              <rect class="box" x="660" y="150" width="220" height="160" rx="14"/>
+              <rect x="676" y="166" width="188" height="128" rx="8" fill="#07102A"/>
+              <path d="M770 310 V350 M720 352 H820" stroke="#24396B" stroke-width="6" stroke-linecap="round"/>
+              <g class="screen-text">
+                <text x="690" y="208" style="font-family:ui-monospace,Consolas,monospace;font-size:20px;fill:var(--cyan)">&gt; Hello!</text>
+                <text x="690" y="244" style="font-family:ui-monospace,Consolas,monospace;font-size:20px;fill:#fff">2 + 2 = 4</text>
+                <rect x="690" y="262" width="14" height="4" fill="var(--cyan)" style="animation:blink 1s steps(1) infinite"/>
+              </g>
+              <text x="770" y="390" text-anchor="middle">RESULT</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================
+         SPEAKER 2 · SLIDE 4 — ELECTRICITY
+         ================================================= -->
+    <section class="slide s-elec" data-speaker="2">
+      <div class="eyebrow rv">Part 2 · Electricity</div>
+      <h2 class="rv" style="--i:1">Electricity <span class="hl">Powers</span> Computers</h2>
+      <div class="body">
+        <div>
+          <div class="defs">
+            <div class="def card rv" style="--i:2"><div class="sym"><svg width="32" height="32"><use href="#i-bolt"/></svg></div><div><b>Electricity</b><span>The flow of tiny charges (electrons)</span></div></div>
+            <div class="def card rv" style="--i:3"><div class="sym">V</div><div><b>Voltage = the push</b><span>Like water pressure in a pipe</span></div></div>
+            <div class="def card rv" style="--i:4"><div class="sym">I</div><div><b>Current = the flow</b><span>Like water moving in the pipe</span></div></div>
+          </div>
+          <div class="meter card rv" style="--i:5">
+            <div class="row"><label for="voltSlider">Change the voltage</label><span class="try">Try it</span></div>
+            <input type="range" id="voltSlider" min="0" max="12" step="0.5" value="6" aria-label="Voltage">
+            <div class="readouts">
+              <div class="readout"><small>Voltage (push)</small><b id="vOut">6.0<em>V</em></b></div>
+              <div class="readout"><small>Current (flow)</small><b id="iOut">0.60<em>A</em></b></div>
+            </div>
+            <div class="formula">Current = Voltage ÷ Resistance (here, resistance = 10 Ω)</div>
+          </div>
+        </div>
+        <div class="circuit rv" style="--i:3">
+          <svg viewBox="0 0 860 600" id="circuitSvg" aria-label="Animated circuit with battery, CPU, memory and light">
+            <path class="wire" id="loopPath" d="M140 120 H720 Q740 120 740 140 V460 Q740 480 720 480 H140 Q120 480 120 460 V140 Q120 120 140 120 Z"/>
+            <path class="wire-glow" d="M140 120 H720 Q740 120 740 140 V460 Q740 480 720 480 H140 Q120 480 120 460 V140 Q120 120 140 120 Z"/>
+            <g id="charges"></g>
+            <!-- battery -->
+            <rect class="part" x="70" y="230" width="100" height="140" rx="14"/>
+            <rect x="105" y="220" width="30" height="12" rx="3" fill="#33456F"/>
+            <text x="120" y="285" text-anchor="middle" font-size="30">+</text>
+            <text x="120" y="345" text-anchor="middle" font-size="30">−</text>
+            <text class="sm" x="186" y="306" text-anchor="start">BATTERY</text>
+            <!-- cpu -->
+            <rect class="part" x="350" y="70" width="140" height="100" rx="14"/>
+            <text x="420" y="128" text-anchor="middle">CPU</text>
+            <text class="sm" x="420" y="56" text-anchor="middle">PROCESSOR</text>
+            <!-- ram -->
+            <rect class="part" x="690" y="240" width="100" height="120" rx="12"/>
+            <path d="M708 330 v18 M724 330 v18 M740 330 v18 M756 330 v18 M772 330 v18" stroke="#33456F" stroke-width="4"/>
+            <text x="740" y="300" text-anchor="middle">RAM</text>
+            <text class="sm" x="674" y="306" text-anchor="end">MEMORY</text>
+            <!-- led -->
+            <circle id="ledGlow" cx="430" cy="480" r="60" fill="var(--cyan)" opacity=".3" style="filter:blur(18px)"/>
+            <circle class="part" id="led" cx="430" cy="480" r="38"/>
+            <text class="sm" x="430" y="550" text-anchor="middle">LIGHT</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================
+         SPEAKER 2 · SLIDE 5 — TRANSISTORS & BINARY
+         ================================================= -->
+    <section class="slide s-trans" data-speaker="2">
+      <div class="eyebrow rv">Part 2 · Electronics</div>
+      <h2 class="rv" style="--i:1">Transistors and <span class="hl">Binary</span> Numbers</h2>
+      <div class="body">
+        <div class="top">
+          <ul class="points rv" style="--i:2">
+            <li><span class="ic"><svg><use href="#i-switch"/></svg></span><span>A transistor is a <b class="hl">tiny electric switch.</b></span></li>
+            <li><span class="ic">1</span><span>Switch ON → current flows → <b class="hl">1</b></span></li>
+            <li><span class="ic">0</span><span>Switch OFF → no current → <b>0</b><small>A modern phone chip has billions of transistors.</small></span></li>
+          </ul>
+          <div class="tr-demo card rv" id="trDemo" style="--i:3">
+            <svg viewBox="0 0 520 280" aria-label="Transistor diagram">
+              <text x="210" y="24" text-anchor="middle">CONTROL SIGNAL</text>
+              <path class="wire" d="M210 34 V96"/>
+              <path class="wire" d="M10 140 H70"/>
+              <path class="wire" d="M350 140 H418"/>
+              <rect class="silicon" x="60" y="150" width="300" height="90" rx="12"/>
+              <rect class="metal" x="70" y="120" width="70" height="42" rx="6"/>
+              <rect class="metal" x="280" y="120" width="70" height="42" rx="6"/>
+              <rect class="channel" x="140" y="152" width="140" height="18" rx="4"/>
+              <rect class="gate" x="150" y="96" width="120" height="40" rx="6"/>
+              <text x="210" y="122" text-anchor="middle" style="fill:#fff">GATE</text>
+              <text x="105" y="268" text-anchor="middle">IN</text>
+              <text x="315" y="268" text-anchor="middle">OUT</text>
+              <text x="210" y="214" text-anchor="middle" style="fill:#3B4E7E">SILICON</text>
+              <circle class="bulb" cx="450" cy="140" r="30"/>
+              <path d="M440 170 h20 M442 178 h16" stroke="#33456F" stroke-width="4" stroke-linecap="round"/>
+              <text x="450" y="210" text-anchor="middle">LIGHT</text>
+              <g id="trElectrons"></g>
+            </svg>
+            <div class="tr-side">
+              <div class="bigbit" id="bigBit">0</div>
+              <div class="bitlabel" id="bitLabel">OFF = 0</div>
+              <button class="toggle" id="trToggle" aria-pressed="false" aria-label="Turn transistor on or off"><span class="t-on">ON</span><span class="t-off">OFF</span></button>
+            </div>
+          </div>
+        </div>
+        <div class="byte card rv" style="--i:4">
+          <h4>8 switches = 1 byte<small>Click the switches</small></h4>
+          <div class="bits" id="bits"></div>
+          <div class="byte-out">
+            <div class="readout"><small>Number</small><b id="byteNum">65</b></div>
+            <div class="readout letter"><small>Letter</small><b id="byteChar">A</b></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================
+         SPEAKER 2 · SLIDE 6 — LOGIC GATES
+         ================================================= -->
+    <section class="slide s-gates" data-speaker="2">
+      <div class="eyebrow rv">Part 2 · Digital electronics</div>
+      <h2 class="rv" style="--i:1">Logic Gates: <span class="hl">Simple Decisions</span></h2>
+      <div class="body">
+        <div class="gate-tabs">
+          <button class="gate-tab rv on" style="--i:2" data-gate="AND">
+            <svg viewBox="0 0 92 56"><path d="M4 18h18M4 38h18M70 28h18"/><path d="M22 6h22a22 22 0 0 1 0 44H22z"/></svg>
+            <span><b>AND</b><span>1 only if <b>both</b> inputs are 1</span></span>
+          </button>
+          <button class="gate-tab rv" style="--i:3" data-gate="OR">
+            <svg viewBox="0 0 92 56"><path d="M4 18h22M4 38h22M72 28h16"/><path d="M18 6q14 22 0 44q34 0 54-22q-20-22-54-22z"/></svg>
+            <span><b>OR</b><span>1 if <b>any</b> input is 1</span></span>
+          </button>
+          <button class="gate-tab rv" style="--i:4" data-gate="NOT">
+            <svg viewBox="0 0 92 56"><path d="M4 28h20M70 28h18"/><path d="M24 8l38 20-38 20z"/><circle cx="66" cy="28" r="4"/></svg>
+            <span><b>NOT</b><span>Gives the <b>opposite</b></span></span>
+          </button>
+        </div>
+
+        <div class="gate-lab card rv" style="--i:3">
+          <div class="gate-stage">
+            <div class="inputs" id="gateInputs">
+              <button class="inbtn" id="inA" aria-pressed="false"><span class="v">0</span><span>A</span></button>
+              <button class="inbtn" id="inB" aria-pressed="false"><span class="v">0</span><span>B</span></button>
+            </div>
+            <svg class="gate-svg" viewBox="0 0 620 300" preserveAspectRatio="xMinYMid meet" aria-label="Logic gate diagram">
+              <!-- AND -->
+              <g class="g show" data-g="AND">
+                <path class="w wa" d="M0 75 H150 V100 H232"/>
+                <path class="w wb" d="M0 225 H150 V200 H232"/>
+                <path class="w wo" d="M370 150 H500"/>
+                <path class="shape" d="M230 80 H300 A70 70 0 0 1 300 220 H230 Z"/>
+                <text class="gname" x="285" y="160" text-anchor="middle">AND</text>
+              </g>
+              <!-- OR -->
+              <g class="g" data-g="OR">
+                <path class="w wa" d="M0 75 H150 V105 H250"/>
+                <path class="w wb" d="M0 225 H150 V195 H250"/>
+                <path class="w wo" d="M375 150 H500"/>
+                <path class="shape" d="M222 80 Q262 150 222 220 Q320 220 378 150 Q320 80 222 80 Z"/>
+                <text class="gname" x="300" y="160" text-anchor="middle">OR</text>
+              </g>
+              <!-- NOT -->
+              <g class="g" data-g="NOT">
+                <path class="w wa" d="M0 150 H232"/>
+                <path class="w wo" d="M368 150 H500"/>
+                <path class="shape" d="M232 85 L342 150 L232 215 Z"/>
+                <circle class="shape" cx="354" cy="150" r="12"/>
+                <text class="gname" x="270" y="160" text-anchor="middle">NOT</text>
+              </g>
+              <circle class="lamp" id="gLamp" cx="548" cy="150" r="44"/>
+              <text class="outv" id="gOutV" x="548" y="162" text-anchor="middle">0</text>
+              <text class="olbl" x="548" y="226" text-anchor="middle">OUTPUT</text>
+            </svg>
+          </div>
+          <div class="gate-bottom">
+            <p class="example" id="gateExample"></p>
+            <table class="truth" id="truth" aria-label="Truth table"></table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================
+         SPEAKER 3 · SLIDE 7 — FIBER OPTICS
+         ================================================= -->
+    <section class="slide s-fiber" data-speaker="3">
+      <div class="eyebrow rv">Part 3 · Light</div>
+      <h2 class="rv" style="--i:1">Fiber Optic <span class="hl">Communication</span></h2>
+      <div class="body">
+        <div class="row3">
+          <div class="mini card rv" style="--i:2"><span class="ic"><svg><use href="#i-light"/></svg></span><p>Data travels as <span class="hl">flashes of light.</span> Flash = 1, no flash = 0.</p></div>
+          <div class="mini card rv" style="--i:3"><span class="ic"><svg><use href="#i-fiber"/></svg></span><p>Light <span class="hl">bounces</span> inside the thin glass and stays in.</p></div>
+          <div class="mini card rv" style="--i:4"><span class="ic"><svg><use href="#i-speed"/></svg></span><p>Light is very fast, so we get <span class="hl">fast internet.</span></p></div>
+        </div>
+        <svg class="fiber-svg rv" style="--i:4" viewBox="0 0 1400 330" id="fiberSvg" aria-label="Light pulses moving through a fiber optic cable">
+          <rect class="box" x="0" y="95" width="170" height="140" rx="16"/>
+          <text x="85" y="78" text-anchor="middle">SENDER</text>
+          <text class="sm" x="70" y="172" text-anchor="middle">LASER</text>
+          <rect class="laser" id="laser" x="130" y="140" width="40" height="50" rx="6"/>
+          <rect class="jacket" x="186" y="92" width="1008" height="146" rx="73"/>
+          <rect class="cladding" x="190" y="110" width="1000" height="110" rx="55"/>
+          <rect class="core" x="190" y="134" width="1000" height="62"/>
+          <polyline class="ray" id="rayLine" points=""/>
+          <g id="photons"></g>
+          <rect class="box" x="1210" y="95" width="190" height="140" rx="16"/>
+          <text x="1305" y="78" text-anchor="middle">RECEIVER</text>
+          <circle class="detector" id="detector" cx="1236" cy="165" r="14"/>
+          <text class="rx" id="rxText" x="1320" y="180" text-anchor="middle">–</text>
+          <text class="sm" x="1320" y="216" text-anchor="middle" id="rxBits">waiting…</text>
+          <path d="M520 196 V262" stroke="var(--dim)" stroke-width="2" stroke-dasharray="4 5"/>
+          <text class="sm" x="520" y="284" text-anchor="middle">Glass core (light travels here)</text>
+          <path d="M880 220 V262" stroke="var(--dim)" stroke-width="2" stroke-dasharray="4 5"/>
+          <text class="sm" x="880" y="284" text-anchor="middle">Outer glass layer (keeps light inside)</text>
+        </svg>
+        <div class="fiber-ctrl rv" style="--i:5">
+          <input type="text" id="fiberInput" value="HI" maxlength="5" aria-label="Word to send" spellcheck="false" autocomplete="off">
+          <button class="btn" id="fiberSend"><svg width="20" height="20"><use href="#i-light"/></svg>Send</button>
+          <div class="bitstream" id="bitstream"></div>
+          <div class="speed-chip">Light in glass: about <b>200,000 km</b> every second</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================
+         SPEAKER 3 · SLIDE 8 — WIRELESS
+         ================================================= -->
+    <section class="slide s-wifi" data-speaker="3">
+      <div class="eyebrow rv">Part 3 · Waves</div>
+      <h2 class="rv" style="--i:1">Wireless <span class="hl">Communication</span></h2>
+      <div class="body">
+        <div>
+          <ul class="points rv" style="--i:2">
+            <li><span class="ic"><svg><use href="#i-wifi"/></svg></span><span>Devices talk using <b class="hl">electromagnetic waves.</b><small>Invisible waves of energy</small></span></li>
+            <li><span class="ic"><svg><use href="#i-speed"/></svg></span><span>They travel at the <b>speed of light.</b> No wires needed!</span></li>
+          </ul>
+          <div class="wtabs rv" style="--i:3" id="wtabs">
+            <button class="wtab on" data-w="wifi"><span class="ic"><svg><use href="#i-wifi"/></svg></span><span><b>Wi-Fi</b><span>Internet at home and school</span></span><em>~50 m</em></button>
+            <button class="wtab" data-w="bt"><span class="ic"><svg><use href="#i-bt"/></svg></span><span><b>Bluetooth</b><span>Very close devices, like earphones</span></span><em>~10 m</em></button>
+            <button class="wtab" data-w="mobile"><span class="ic"><svg><use href="#i-tower"/></svg></span><span><b>Mobile network</b><span>Tall towers for long distances</span></span><em>many km</em></button>
+          </div>
+        </div>
+        <div class="scene rv" style="--i:3">
+          <svg viewBox="0 0 880 600" id="wifiSvg" aria-label="Wireless signals between devices">
+            <!-- links -->
+            <line class="link" data-l="mobile" x1="150" y1="110" x2="300" y2="430"/>
+            <line class="link" data-l="wifi" x1="470" y1="270" x2="700" y2="170"/>
+            <line class="link" data-l="wifi" x1="470" y1="270" x2="310" y2="430"/>
+            <line class="link" data-l="bt" x1="300" y1="460" x2="140" y2="480"/>
+            <g id="packets"></g>
+
+            <!-- tower -->
+            <g class="devg" data-d="mobile">
+              <g class="emitter" data-e="mobile"><circle class="ring" cx="150" cy="90" r="150"/><circle class="ring" cx="150" cy="90" r="150"/><circle class="ring" cx="150" cy="90" r="150"/></g>
+              <path class="dev-line" d="M150 90 V100 M120 280 L150 100 L180 280 M130 220 H170 M136 170 H164 M128 230 L172 170 M172 230 L128 170"/>
+              <circle cx="150" cy="90" r="9" fill="var(--cyan)"/>
+              <text x="150" y="310" text-anchor="middle">TOWER</text>
+            </g>
+            <!-- router -->
+            <g class="devg" data-d="wifi">
+              <g class="emitter on" data-e="wifi"><circle class="ring" cx="470" cy="270" r="170"/><circle class="ring" cx="470" cy="270" r="170"/><circle class="ring" cx="470" cy="270" r="170"/></g>
+              <path class="dev-line" d="M425 260 L410 210 M515 260 L530 210"/>
+              <rect class="dev" x="400" y="258" width="140" height="52" rx="14"/>
+              <circle cx="430" cy="284" r="5" fill="var(--cyan)"/><circle cx="450" cy="284" r="5" fill="var(--cyan)"/><circle cx="470" cy="284" r="5" fill="var(--blue)"/>
+              <text x="470" y="342" text-anchor="middle">ROUTER</text>
+            </g>
+            <!-- laptop -->
+            <g class="devg" data-d="wifi">
+              <rect class="dev" x="650" y="110" width="150" height="96" rx="10"/>
+              <rect x="664" y="124" width="122" height="68" rx="4" fill="#07102A"/>
+              <path class="dev-line" d="M630 214 H820"/>
+              <text x="725" y="248" text-anchor="middle">LAPTOP</text>
+            </g>
+            <!-- phone -->
+            <g class="devg" data-d="phone">
+              <g class="emitter" data-e="bt"><circle class="ring" cx="300" cy="460" r="110"/><circle class="ring" cx="300" cy="460" r="110"/><circle class="ring" cx="300" cy="460" r="110"/></g>
+              <rect class="dev" x="270" y="405" width="62" height="112" rx="12"/>
+              <rect x="278" y="417" width="46" height="80" rx="4" fill="#07102A"/>
+              <text x="301" y="548" text-anchor="middle">PHONE</text>
+            </g>
+            <!-- earphones -->
+            <g class="devg" data-d="bt">
+              <path class="dev-line" d="M100 500 V470 a40 40 0 0 1 80 0 V500"/>
+              <rect class="dev" x="88" y="490" width="26" height="42" rx="10"/>
+              <rect class="dev" x="166" y="490" width="26" height="42" rx="10"/>
+              <text x="140" y="565" text-anchor="middle">EARPHONES</text>
+            </g>
+            <!-- wave explainer -->
+            <g transform="translate(560 420)">
+              <rect x="0" y="0" width="300" height="140" rx="16" fill="var(--panel)" stroke="var(--line)"/>
+              <path class="wave" id="emWave" d=""/>
+              <path d="M40 106 H140" stroke="var(--cyan)" stroke-width="2"/>
+              <path d="M40 98 V114 M140 98 V114" stroke="var(--cyan)" stroke-width="2"/>
+              <text x="90" y="130" text-anchor="middle" style="font-size:14px;fill:var(--cyan)">one wave</text>
+              <text x="20" y="30" style="font-size:15px">EM wave · moves at 300,000 km/s</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================
+         SPEAKER 3 · SLIDE 9 — SENSORS & ROBOTS
+         ================================================= -->
+    <section class="slide s-robot" data-speaker="3">
+      <div class="eyebrow rv">Part 3 · Sensors</div>
+      <h2 class="rv" style="--i:1">Sensors and <span class="hl">Robotics</span></h2>
+      <div class="body">
+        <div class="sensors">
+          <div class="sensor card rv" style="--i:2"><span class="ic"><svg><use href="#i-move"/></svg></span><b>Movement</b><span>Feels motion and tilt (force)</span></div>
+          <div class="sensor card rv" style="--i:3"><span class="ic"><svg><use href="#i-echo"/></svg></span><b>Distance</b><span>Uses a sound echo</span></div>
+          <div class="sensor card rv" style="--i:4"><span class="ic"><svg><use href="#i-light"/></svg></span><b>Light</b><span>Sees bright and dark</span></div>
+          <div class="sensor card rv" style="--i:5"><span class="ic"><svg><use href="#i-temp"/></svg></span><b>Temperature</b><span>Feels hot and cold (heat)</span></div>
+          <div class="echo-formula card rv" style="--i:6"><b>Echo rule:</b> Distance = speed of sound × time ÷ 2</div>
+        </div>
+        <div class="robot-lab card rv" style="--i:3">
+          <svg class="robot-svg" viewBox="0 0 820 400" id="robotSvg" aria-label="Robot using a distance sensor to detect a box">
+            <line class="floor" x1="0" y1="350" x2="820" y2="350"/>
+            <g id="sndWaves"></g>
+            <line class="ruler" id="ruler" x1="0" y1="190" x2="0" y2="190"/>
+            <text id="distText" x="0" y="176" text-anchor="middle">--</text>
+            <g id="boxObj"><rect class="boxo" x="0" y="220" width="96" height="130" rx="8"/><text x="48" y="292" text-anchor="middle" style="fill:#fff">BOX</text></g>
+            <g id="robot">
+              <line x1="75" y1="150" x2="75" y2="126" stroke="var(--muted)" stroke-width="3"/>
+              <circle class="led" id="robotLed" cx="75" cy="120" r="8"/>
+              <rect class="body" x="30" y="150" width="90" height="52" rx="12"/>
+              <circle cx="58" cy="176" r="7" fill="var(--cyan)"/><circle cx="92" cy="176" r="7" fill="var(--cyan)"/>
+              <rect class="body" x="10" y="210" width="130" height="100" rx="18"/>
+              <rect class="eye" x="140" y="232" width="20" height="56" rx="6"/>
+              <circle cx="150" cy="246" r="5" fill="var(--cyan)"/><circle cx="150" cy="274" r="5" fill="var(--cyan)"/>
+              <g class="wheelg" id="w1" transform="translate(42 320)"><circle class="wheel" r="26"/><path class="spoke" d="M-18 0 H18 M0 -18 V18"/></g>
+              <g class="wheelg" id="w2" transform="translate(110 320)"><circle class="wheel" r="26"/><path class="spoke" d="M-18 0 H18 M0 -18 V18"/></g>
+            </g>
+          </svg>
+          <div class="robot-hud">
+            <div class="status" id="robotStatus">Scanning…</div>
+            <label for="boxSlider">Move the box <input type="range" id="boxSlider" min="460" max="700" value="640" style="width:200px"></label>
+            <span></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================
+         SPEAKER 4 · SLIDE 10 — QUANTUM
+         ================================================= -->
+    <section class="slide s-quantum" data-speaker="4">
+      <div class="eyebrow rv">Part 4 · The future</div>
+      <h2 class="rv" style="--i:1">Quantum <span class="hl">Computing</span></h2>
+      <div class="body">
+        <div>
+          <div class="compare">
+            <div class="cmp card rv" style="--i:2">
+              <svg class="viz" viewBox="0 0 240 110" aria-hidden="true">
+                <circle class="coin" cx="120" cy="55" r="44"/>
+                <text class="coin-txt" id="coinTxt" x="120" y="67" text-anchor="middle">0</text>
+              </svg>
+              <h4>Normal bit</h4>
+              <p>Always <b>0</b> or <b>1</b>.</p>
+            </div>
+            <div class="cmp card qb rv" style="--i:3">
+              <svg class="viz" viewBox="0 0 240 110" aria-hidden="true">
+                <circle cx="100" cy="55" r="40" fill="rgba(34,211,238,.18)" stroke="var(--cyan)" stroke-width="2"><animate attributeName="cx" values="100;110;100" dur="3s" repeatCount="indefinite"/></circle>
+                <circle cx="140" cy="55" r="40" fill="rgba(47,123,255,.2)" stroke="var(--blue)" stroke-width="2"><animate attributeName="cx" values="140;130;140" dur="3s" repeatCount="indefinite"/></circle>
+                <text class="coin-txt" x="92" y="67" text-anchor="middle" style="font-size:30px">0</text>
+                <text class="coin-txt" x="148" y="67" text-anchor="middle" style="font-size:30px">1</text>
+              </svg>
+              <h4 class="hl">Qubit</h4>
+              <p>A <b>mix of 0 and 1</b> until we measure it.</p>
+            </div>
+          </div>
+          <ul class="points rv" style="--i:4">
+            <li><span class="ic"><svg><use href="#i-check"/></svg></span><span>Good for special problems: <b>new medicines and materials.</b></span></li>
+            <li><span class="ic">!</span><span>Not faster for everything. Still new, and many need <b>very cold</b> temperatures.</span></li>
+          </ul>
+        </div>
+        <div class="bloch card rv" style="--i:3">
+          <svg viewBox="0 0 600 400" id="blochSvg" aria-label="Qubit sphere visualisation">
+            <circle class="glow-ring" cx="300" cy="200" r="168"/>
+            <circle class="sphere" cx="300" cy="200" r="150"/>
+            <ellipse class="eq" cx="300" cy="200" rx="150" ry="40"/>
+            <line class="axis" x1="300" y1="44" x2="300" y2="356"/>
+            <circle class="flash" id="qFlash" cx="300" cy="200" r="150"/>
+            <line class="vec" id="qVec" x1="300" y1="200" x2="300" y2="50"/>
+            <circle class="tip" id="qTip" cx="300" cy="50" r="10"/>
+            <circle cx="300" cy="200" r="5" fill="var(--muted)"/>
+            <text class="ket" x="300" y="30" text-anchor="middle">0</text>
+            <text class="ket" x="300" y="390" text-anchor="middle">1</text>
+          </svg>
+          <div class="probs">
+            <div class="prob p0"><small><span>Chance of 0</span><span id="p0t">50%</span></small><div class="bar"><i id="p0b"></i></div></div>
+            <div class="prob p1"><small><span>Chance of 1</span><span id="p1t">50%</span></small><div class="bar"><i id="p1b"></i></div></div>
+          </div>
+          <div class="q-ctrl">
+            <button class="btn" id="qMeasure">Measure</button>
+            <button class="btn ghost" id="qReset">Reset</button>
+            <div class="q-result" id="qResult">Result: <b>?</b><br><span id="qTally">0s: 0 · 1s: 0</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================
+         SPEAKER 4 · SLIDE 11 — FUTURE TECHNOLOGY
+         ================================================= -->
+    <section class="slide s-future" data-speaker="4">
+      <div class="eyebrow rv">Part 4 · The future</div>
+      <h2 class="rv" style="--i:1">Future <span class="hl">Technology</span></h2>
+      <div class="body">
+        <div class="fcards">
+          <div class="fcard card rv" style="--i:2" tabindex="0">
+            <svg viewBox="0 0 300 200" aria-hidden="true">
+              <rect class="fill" x="55" y="160" width="70" height="20" rx="4"/>
+              <circle class="lc" cx="90" cy="150" r="10"/>
+              <g class="arm-a">
+                <path class="ln" d="M90 150 L140 95"/>
+                <circle class="lc" cx="140" cy="95" r="9"/>
+                <g class="arm-b">
+                  <path class="ln" d="M140 95 L205 80"/>
+                  <path class="lc" d="M205 80 l14 -12 M205 80 l14 12"/>
+                </g>
+              </g>
+              <circle cx="235" cy="160" r="8" fill="var(--cyan)"><animate attributeName="opacity" values="1;.2;1" dur="1.4s" repeatCount="indefinite"/></circle>
+              <path d="M225 150 a14 14 0 0 1 20 0" class="lc" opacity=".5"/>
+            </svg>
+            <h4>Smart Robots</h4>
+            <p>Better sensors and motors help robots see and move.</p>
+            <span class="tag">Sensors + motors</span>
+          </div>
+          <div class="fcard card rv" style="--i:3" tabindex="0">
+            <svg viewBox="0 0 300 200" aria-hidden="true">
+              <rect class="fill" x="70" y="60" width="160" height="72" rx="24"/>
+              <circle class="lc" cx="115" cy="96" r="18"/>
+              <circle class="lc" cx="185" cy="96" r="18"/>
+              <path class="lc vr-ray" d="M115 114 L105 175 M185 114 L195 175"/>
+              <path class="ln" d="M70 90 H40 M230 90 H260"/>
+              <path d="M110 40 l15 -16 l15 16 l15 -10 l20 10" class="lc" opacity=".6"/>
+            </svg>
+            <h4>Virtual Reality</h4>
+            <p>Lenses and screens create a new world around you.</p>
+            <span class="tag">Light + lenses</span>
+          </div>
+          <div class="fcard card rv" style="--i:4" tabindex="0">
+            <svg viewBox="0 0 300 200" aria-hidden="true">
+              <path class="ln" d="M20 170 H280" opacity=".5"/>
+              <rect class="fill" x="100" y="26" width="110" height="160" rx="14"/>
+              <path class="ln" d="M112 150 H198" opacity=".7"/>
+              <g class="ar-cube">
+                <path class="lc" d="M160 70 l26 14 v28 l-26 14 l-26 -14 v-28 z M134 84 l26 14 l26 -14 M160 98 v28"/>
+              </g>
+            </svg>
+            <h4>Augmented Reality</h4>
+            <p>Adds digital objects to the real world through a camera.</p>
+            <span class="tag">Cameras + sensors</span>
+          </div>
+          <div class="fcard card rv" style="--i:5" tabindex="0">
+            <svg viewBox="0 0 300 200" aria-hidden="true">
+              <rect class="fill" x="90" y="40" width="120" height="120" rx="14"/>
+              <path class="ln" d="M110 40 v-16 M150 40 v-16 M190 40 v-16 M110 160 v16 M150 160 v16 M190 160 v16 M90 70 h-16 M90 130 h-16 M210 70 h16 M210 130 h16"/>
+              <rect x="112" y="62" width="30" height="30" rx="4" fill="var(--blue)" class="shrink"/>
+              <rect x="158" y="62" width="30" height="30" rx="4" fill="var(--blue)" class="shrink" style="animation-delay:-.7s"/>
+              <rect x="112" y="108" width="30" height="30" rx="4" fill="var(--blue)" class="shrink" style="animation-delay:-1.4s"/>
+              <rect x="158" y="108" width="30" height="30" rx="4" fill="var(--blue)" class="shrink" style="animation-delay:-2.1s"/>
+              <path class="lc chip-path" d="M30 100 H270"/>
+            </svg>
+            <h4>Better Chips</h4>
+            <p>Smaller, faster chips that use less energy.</p>
+            <span class="tag">Tiny transistors + light</span>
+          </div>
+        </div>
+        <p class="future-line rv" style="--i:6">Better Physics <span class="hl">→</span> <b>Better Technology</b></p>
+      </div>
+    </section>
+
+    <!-- =================================================
+         SPEAKER 4 · SLIDE 12 — CONCLUSION
+         ================================================= -->
+    <section class="slide s-end" data-speaker="4">
+      <div class="eyebrow rv">Conclusion</div>
+      <h2 class="rv" style="--i:1">Physics + CSE = <span class="hl">Working Together</span></h2>
+      <div class="body">
+        <div class="recap rv" style="--i:2" id="recap">
+          <svg class="line" viewBox="0 0 1000 6" preserveAspectRatio="none" aria-hidden="true">
+            <line x1="80" y1="3" x2="920" y2="3" stroke="#1A2A52" stroke-width="3"/>
+            <line x1="80" y1="3" x2="920" y2="3" stroke="var(--cyan)" stroke-width="3" stroke-dasharray="40 960" style="animation:pulseMoveR 3.6s linear infinite"/>
+          </svg>
+          <div class="rc"><span class="ic"><svg><use href="#i-bolt"/></svg></span><b>Electricity</b><span>Gives power</span></div>
+          <div class="rc"><span class="ic"><svg><use href="#i-switch"/></svg></span><b>Transistors</b><span>Make 0 and 1</span></div>
+          <div class="rc"><span class="ic"><svg><use href="#i-gate"/></svg></span><b>Logic Gates</b><span>Make decisions</span></div>
+          <div class="rc"><span class="ic"><svg><use href="#i-wifi"/></svg></span><b>Light &amp; Waves</b><span>Connect us</span></div>
+          <div class="rc"><span class="ic"><svg><use href="#i-robot"/></svg></span><b>Sensors</b><span>Feel the world</span></div>
+          <div class="rc"><span class="ic"><svg><use href="#i-qubit"/></svg></span><b>Quantum</b><span>The future</span></div>
+        </div>
+        <div class="end-grid">
+          <div>
+            <p class="quote rv" style="--i:3">“Behind every great computer, there is <span class="hl">great Physics.</span>”</p>
+            <div class="end-points rv" style="--i:4">
+              <p>Physics explains how nature works.</p>
+              <p>CSE turns that knowledge into technology.</p>
+            </div>
+          </div>
+          <div class="thanks card rv" style="--i:5">
+            <svg viewBox="0 0 520 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <g class="spin1" style="transform-origin:260px 150px"><ellipse class="orb" cx="260" cy="150" rx="240" ry="70"/></g>
+              <g class="spin2" style="transform-origin:260px 150px"><ellipse class="orb" cx="260" cy="150" rx="240" ry="70" transform="rotate(60 260 150)"/></g>
+              <g class="spin3" style="transform-origin:260px 150px"><ellipse class="orb" cx="260" cy="150" rx="240" ry="70" transform="rotate(120 260 150)"/></g>
+            </svg>
+            <h3>Thank You</h3>
+            <p>Questions?</p>
+            <div class="team-mini">Speaker 1 · Speaker 2 · Speaker 3 · Speaker 4</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<!-- Controls -->
+<nav class="controls" id="controls" aria-label="Slide controls">
+  <button class="ctrl" id="prevBtn" title="Previous (←)" aria-label="Previous slide"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  <div class="dots" id="dots"></div>
+  <button class="ctrl primary" id="nextBtn" title="Next (→ or Space)" aria-label="Next slide">Next<svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  <button class="ctrl" id="notesBtn" title="Speaker notes (N)" aria-pressed="false"><svg viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></g></svg>Notes</button>
+  <button class="ctrl" id="fsBtn" title="Fullscreen (F)" aria-label="Fullscreen"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+</nav>
+
+<div class="hint"><kbd>←</kbd> <kbd>→</kbd> <kbd>Space</kbd> move · <kbd>N</kbd> notes · <kbd>F</kbd> fullscreen</div>
+
+<!-- Speaker notes panel -->
+<aside class="notes" id="notes" aria-label="Speaker notes">
+  <header><h3>Speaker Notes</h3><button class="close" id="notesClose" aria-label="Close notes">✕</button></header>
+  <div class="content" id="notesContent"></div>
+  <div class="timer">
+    <div class="t-row">
+      <span class="clock" id="clock">0:00</span>
+      <button class="tbtn" id="tStart">Start</button>
+      <button class="tbtn" id="tReset">Reset</button>
+    </div>
+    <div class="tbar"><i id="tBar"></i></div>
+    <small id="tInfo">Practice timer · goal: 2:00 per speaker</small>
+  </div>
+</aside>
+
+<script src="js/notes.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
